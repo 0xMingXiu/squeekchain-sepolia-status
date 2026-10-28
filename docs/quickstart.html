@@ -1,0 +1,2570 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Verify Squeekchain's Sepolia deployment and read SqueekCore's settled work and block progress in three TypeScript files.">
+      
+      
+        <meta name="author" content="Squeekchain">
+      
+      
+        <link rel="canonical" href="https://docs.squeekchain.com/developers/quickstart/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../core/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="zensical-0.0.67">
+    
+    
+  <title>Quickstart · Squeekchain Docs</title>
+
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.4ae390e2.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.96d1a7e4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/docs.css">
+    
+      <link rel="stylesheet" href="../../assets/whitepaper/whitepaper.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  
+  
+  
+  <meta name="theme-color" content="#1A1A20">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" sizes="180x180">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Squeekchain Docs">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Quickstart">
+  <meta property="og:description" content="Verify Squeekchain's Sepolia deployment and read SqueekCore's settled work and block progress in three TypeScript files.">
+  <meta property="og:url" content="https://docs.squeekchain.com/developers/quickstart/">
+  <meta property="og:image" content="https://docs.squeekchain.com/assets/social/card.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1568">
+  <meta property="og:image:height" content="882">
+  <meta property="og:image:alt" content="Squeekchain mark: gold dot-matrix emblem and blue square-tile glyph on a dark dotted grid">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@squeekchain">
+  <meta name="twitter:title" content="Quickstart">
+  <meta name="twitter:description" content="Verify Squeekchain's Sepolia deployment and read SqueekCore's settled work and block progress in three TypeScript files.">
+  <meta name="twitter:image" content="https://docs.squeekchain.com/assets/social/card.png">
+  <meta name="twitter:image:alt" content="Squeekchain mark: gold dot-matrix emblem and blue square-tile glyph on a dark dotted grid">
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#quickstart" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Docs" class="md-header__button md-logo" aria-label="Docs" data-md-component="logo">
+      
+<svg aria-hidden="true" class="docs-brand-logo" height="238" viewBox="73 73 590 238" width="590" xmlns="http://www.w3.org/2000/svg">
+  <path d="M145 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM81 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM401 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM81 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM401 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM81 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM401 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0z" fill="var(--sqk-logo-gold)" />
+  <path d="M433 81h13.9v13.9h-13.9zM449 81h13.9v13.9h-13.9zM465 81h13.9v13.9h-13.9zM481 81h13.9v13.9h-13.9zM497 81h13.9v13.9h-13.9zM513 81h13.9v13.9h-13.9zM529 81h13.9v13.9h-13.9zM545 81h13.9v13.9h-13.9zM561 81h13.9v13.9h-13.9zM577 81h13.9v13.9h-13.9zM593 81h13.9v13.9h-13.9zM609 81h13.9v13.9h-13.9zM625 81h13.9v13.9h-13.9zM641 81h13.9v13.9h-13.9zM433 97h13.9v13.9h-13.9zM449 97h13.9v13.9h-13.9zM465 97h13.9v13.9h-13.9zM481 97h13.9v13.9h-13.9zM497 97h13.9v13.9h-13.9zM513 97h13.9v13.9h-13.9zM529 97h13.9v13.9h-13.9zM545 97h13.9v13.9h-13.9zM561 97h13.9v13.9h-13.9zM577 97h13.9v13.9h-13.9zM593 97h13.9v13.9h-13.9zM609 97h13.9v13.9h-13.9zM625 97h13.9v13.9h-13.9zM641 97h13.9v13.9h-13.9zM433 113h13.9v13.9h-13.9zM449 113h13.9v13.9h-13.9zM465 113h13.9v13.9h-13.9zM481 113h13.9v13.9h-13.9zM497 113h13.9v13.9h-13.9zM513 113h13.9v13.9h-13.9zM529 113h13.9v13.9h-13.9zM545 113h13.9v13.9h-13.9zM561 113h13.9v13.9h-13.9zM577 113h13.9v13.9h-13.9zM593 113h13.9v13.9h-13.9zM609 113h13.9v13.9h-13.9zM625 113h13.9v13.9h-13.9zM641 113h13.9v13.9h-13.9zM433 129h13.9v13.9h-13.9zM449 129h13.9v13.9h-13.9zM465 129h13.9v13.9h-13.9zM481 129h13.9v13.9h-13.9zM497 129h13.9v13.9h-13.9zM513 129h13.9v13.9h-13.9zM529 129h13.9v13.9h-13.9zM545 129h13.9v13.9h-13.9zM561 129h13.9v13.9h-13.9zM577 129h13.9v13.9h-13.9zM593 129h13.9v13.9h-13.9zM609 129h13.9v13.9h-13.9zM625 129h13.9v13.9h-13.9zM641 129h13.9v13.9h-13.9zM433 145h13.9v13.9h-13.9zM449 145h13.9v13.9h-13.9zM465 145h13.9v13.9h-13.9zM481 145h13.9v13.9h-13.9zM497 145h13.9v13.9h-13.9zM513 145h13.9v13.9h-13.9zM529 145h13.9v13.9h-13.9zM545 145h13.9v13.9h-13.9zM561 145h13.9v13.9h-13.9zM577 145h13.9v13.9h-13.9zM593 145h13.9v13.9h-13.9zM609 145h13.9v13.9h-13.9zM625 145h13.9v13.9h-13.9zM641 145h13.9v13.9h-13.9zM433 161h13.9v13.9h-13.9zM449 161h13.9v13.9h-13.9zM465 161h13.9v13.9h-13.9zM481 161h13.9v13.9h-13.9zM497 161h13.9v13.9h-13.9zM513 161h13.9v13.9h-13.9zM529 161h13.9v13.9h-13.9zM545 161h13.9v13.9h-13.9zM561 161h13.9v13.9h-13.9zM577 161h13.9v13.9h-13.9zM593 161h13.9v13.9h-13.9zM609 161h13.9v13.9h-13.9zM625 161h13.9v13.9h-13.9zM641 161h13.9v13.9h-13.9zM433 177h13.9v13.9h-13.9zM449 177h13.9v13.9h-13.9zM465 177h13.9v13.9h-13.9zM481 177h13.9v13.9h-13.9zM497 177h13.9v13.9h-13.9zM513 177h13.9v13.9h-13.9zM529 177h13.9v13.9h-13.9zM545 177h13.9v13.9h-13.9zM561 177h13.9v13.9h-13.9zM577 177h13.9v13.9h-13.9zM593 177h13.9v13.9h-13.9zM609 177h13.9v13.9h-13.9zM625 177h13.9v13.9h-13.9zM641 177h13.9v13.9h-13.9zM433 193h13.9v13.9h-13.9zM449 193h13.9v13.9h-13.9zM465 193h13.9v13.9h-13.9zM481 193h13.9v13.9h-13.9zM497 193h13.9v13.9h-13.9zM513 193h13.9v13.9h-13.9zM529 193h13.9v13.9h-13.9zM545 193h13.9v13.9h-13.9zM561 193h13.9v13.9h-13.9zM577 193h13.9v13.9h-13.9zM593 193h13.9v13.9h-13.9zM609 193h13.9v13.9h-13.9zM625 193h13.9v13.9h-13.9zM641 193h13.9v13.9h-13.9zM433 209h13.9v13.9h-13.9zM449 209h13.9v13.9h-13.9zM465 209h13.9v13.9h-13.9zM481 209h13.9v13.9h-13.9zM497 209h13.9v13.9h-13.9zM513 209h13.9v13.9h-13.9zM529 209h13.9v13.9h-13.9zM545 209h13.9v13.9h-13.9zM561 209h13.9v13.9h-13.9zM577 209h13.9v13.9h-13.9zM593 209h13.9v13.9h-13.9zM609 209h13.9v13.9h-13.9zM625 209h13.9v13.9h-13.9zM641 209h13.9v13.9h-13.9zM433 225h13.9v13.9h-13.9zM449 225h13.9v13.9h-13.9zM465 225h13.9v13.9h-13.9zM481 225h13.9v13.9h-13.9zM497 225h13.9v13.9h-13.9zM513 225h13.9v13.9h-13.9zM529 225h13.9v13.9h-13.9zM545 225h13.9v13.9h-13.9zM561 225h13.9v13.9h-13.9zM577 225h13.9v13.9h-13.9zM593 225h13.9v13.9h-13.9zM609 225h13.9v13.9h-13.9zM625 225h13.9v13.9h-13.9zM641 225h13.9v13.9h-13.9zM433 241h13.9v13.9h-13.9zM449 241h13.9v13.9h-13.9zM465 241h13.9v13.9h-13.9zM481 241h13.9v13.9h-13.9zM497 241h13.9v13.9h-13.9zM513 241h13.9v13.9h-13.9zM529 241h13.9v13.9h-13.9zM545 241h13.9v13.9h-13.9zM561 241h13.9v13.9h-13.9zM577 241h13.9v13.9h-13.9zM593 241h13.9v13.9h-13.9zM609 241h13.9v13.9h-13.9zM625 241h13.9v13.9h-13.9zM641 241h13.9v13.9h-13.9zM433 257h13.9v13.9h-13.9zM449 257h13.9v13.9h-13.9zM465 257h13.9v13.9h-13.9zM481 257h13.9v13.9h-13.9zM497 257h13.9v13.9h-13.9zM513 257h13.9v13.9h-13.9zM529 257h13.9v13.9h-13.9zM545 257h13.9v13.9h-13.9zM561 257h13.9v13.9h-13.9zM577 257h13.9v13.9h-13.9zM593 257h13.9v13.9h-13.9zM609 257h13.9v13.9h-13.9zM625 257h13.9v13.9h-13.9zM641 257h13.9v13.9h-13.9zM433 273h13.9v13.9h-13.9zM449 273h13.9v13.9h-13.9zM465 273h13.9v13.9h-13.9zM481 273h13.9v13.9h-13.9zM497 273h13.9v13.9h-13.9zM513 273h13.9v13.9h-13.9zM529 273h13.9v13.9h-13.9zM545 273h13.9v13.9h-13.9zM561 273h13.9v13.9h-13.9zM577 273h13.9v13.9h-13.9zM593 273h13.9v13.9h-13.9zM609 273h13.9v13.9h-13.9zM625 273h13.9v13.9h-13.9zM641 273h13.9v13.9h-13.9zM433 289h13.9v13.9h-13.9zM449 289h13.9v13.9h-13.9zM465 289h13.9v13.9h-13.9zM481 289h13.9v13.9h-13.9zM497 289h13.9v13.9h-13.9zM513 289h13.9v13.9h-13.9zM529 289h13.9v13.9h-13.9zM545 289h13.9v13.9h-13.9zM561 289h13.9v13.9h-13.9zM577 289h13.9v13.9h-13.9zM593 289h13.9v13.9h-13.9zM609 289h13.9v13.9h-13.9zM625 289h13.9v13.9h-13.9zM641 289h13.9v13.9h-13.9z" fill="var(--sqk-logo-blue)" />
+</svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Quickstart
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Docs" class="md-nav__button md-logo" aria-label="Docs" data-md-component="logo">
+      
+<svg aria-hidden="true" class="docs-brand-logo" height="238" viewBox="73 73 590 238" width="590" xmlns="http://www.w3.org/2000/svg">
+  <path d="M145 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM81 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM401 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM81 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM401 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM81 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM401 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0z" fill="var(--sqk-logo-gold)" />
+  <path d="M433 81h13.9v13.9h-13.9zM449 81h13.9v13.9h-13.9zM465 81h13.9v13.9h-13.9zM481 81h13.9v13.9h-13.9zM497 81h13.9v13.9h-13.9zM513 81h13.9v13.9h-13.9zM529 81h13.9v13.9h-13.9zM545 81h13.9v13.9h-13.9zM561 81h13.9v13.9h-13.9zM577 81h13.9v13.9h-13.9zM593 81h13.9v13.9h-13.9zM609 81h13.9v13.9h-13.9zM625 81h13.9v13.9h-13.9zM641 81h13.9v13.9h-13.9zM433 97h13.9v13.9h-13.9zM449 97h13.9v13.9h-13.9zM465 97h13.9v13.9h-13.9zM481 97h13.9v13.9h-13.9zM497 97h13.9v13.9h-13.9zM513 97h13.9v13.9h-13.9zM529 97h13.9v13.9h-13.9zM545 97h13.9v13.9h-13.9zM561 97h13.9v13.9h-13.9zM577 97h13.9v13.9h-13.9zM593 97h13.9v13.9h-13.9zM609 97h13.9v13.9h-13.9zM625 97h13.9v13.9h-13.9zM641 97h13.9v13.9h-13.9zM433 113h13.9v13.9h-13.9zM449 113h13.9v13.9h-13.9zM465 113h13.9v13.9h-13.9zM481 113h13.9v13.9h-13.9zM497 113h13.9v13.9h-13.9zM513 113h13.9v13.9h-13.9zM529 113h13.9v13.9h-13.9zM545 113h13.9v13.9h-13.9zM561 113h13.9v13.9h-13.9zM577 113h13.9v13.9h-13.9zM593 113h13.9v13.9h-13.9zM609 113h13.9v13.9h-13.9zM625 113h13.9v13.9h-13.9zM641 113h13.9v13.9h-13.9zM433 129h13.9v13.9h-13.9zM449 129h13.9v13.9h-13.9zM465 129h13.9v13.9h-13.9zM481 129h13.9v13.9h-13.9zM497 129h13.9v13.9h-13.9zM513 129h13.9v13.9h-13.9zM529 129h13.9v13.9h-13.9zM545 129h13.9v13.9h-13.9zM561 129h13.9v13.9h-13.9zM577 129h13.9v13.9h-13.9zM593 129h13.9v13.9h-13.9zM609 129h13.9v13.9h-13.9zM625 129h13.9v13.9h-13.9zM641 129h13.9v13.9h-13.9zM433 145h13.9v13.9h-13.9zM449 145h13.9v13.9h-13.9zM465 145h13.9v13.9h-13.9zM481 145h13.9v13.9h-13.9zM497 145h13.9v13.9h-13.9zM513 145h13.9v13.9h-13.9zM529 145h13.9v13.9h-13.9zM545 145h13.9v13.9h-13.9zM561 145h13.9v13.9h-13.9zM577 145h13.9v13.9h-13.9zM593 145h13.9v13.9h-13.9zM609 145h13.9v13.9h-13.9zM625 145h13.9v13.9h-13.9zM641 145h13.9v13.9h-13.9zM433 161h13.9v13.9h-13.9zM449 161h13.9v13.9h-13.9zM465 161h13.9v13.9h-13.9zM481 161h13.9v13.9h-13.9zM497 161h13.9v13.9h-13.9zM513 161h13.9v13.9h-13.9zM529 161h13.9v13.9h-13.9zM545 161h13.9v13.9h-13.9zM561 161h13.9v13.9h-13.9zM577 161h13.9v13.9h-13.9zM593 161h13.9v13.9h-13.9zM609 161h13.9v13.9h-13.9zM625 161h13.9v13.9h-13.9zM641 161h13.9v13.9h-13.9zM433 177h13.9v13.9h-13.9zM449 177h13.9v13.9h-13.9zM465 177h13.9v13.9h-13.9zM481 177h13.9v13.9h-13.9zM497 177h13.9v13.9h-13.9zM513 177h13.9v13.9h-13.9zM529 177h13.9v13.9h-13.9zM545 177h13.9v13.9h-13.9zM561 177h13.9v13.9h-13.9zM577 177h13.9v13.9h-13.9zM593 177h13.9v13.9h-13.9zM609 177h13.9v13.9h-13.9zM625 177h13.9v13.9h-13.9zM641 177h13.9v13.9h-13.9zM433 193h13.9v13.9h-13.9zM449 193h13.9v13.9h-13.9zM465 193h13.9v13.9h-13.9zM481 193h13.9v13.9h-13.9zM497 193h13.9v13.9h-13.9zM513 193h13.9v13.9h-13.9zM529 193h13.9v13.9h-13.9zM545 193h13.9v13.9h-13.9zM561 193h13.9v13.9h-13.9zM577 193h13.9v13.9h-13.9zM593 193h13.9v13.9h-13.9zM609 193h13.9v13.9h-13.9zM625 193h13.9v13.9h-13.9zM641 193h13.9v13.9h-13.9zM433 209h13.9v13.9h-13.9zM449 209h13.9v13.9h-13.9zM465 209h13.9v13.9h-13.9zM481 209h13.9v13.9h-13.9zM497 209h13.9v13.9h-13.9zM513 209h13.9v13.9h-13.9zM529 209h13.9v13.9h-13.9zM545 209h13.9v13.9h-13.9zM561 209h13.9v13.9h-13.9zM577 209h13.9v13.9h-13.9zM593 209h13.9v13.9h-13.9zM609 209h13.9v13.9h-13.9zM625 209h13.9v13.9h-13.9zM641 209h13.9v13.9h-13.9zM433 225h13.9v13.9h-13.9zM449 225h13.9v13.9h-13.9zM465 225h13.9v13.9h-13.9zM481 225h13.9v13.9h-13.9zM497 225h13.9v13.9h-13.9zM513 225h13.9v13.9h-13.9zM529 225h13.9v13.9h-13.9zM545 225h13.9v13.9h-13.9zM561 225h13.9v13.9h-13.9zM577 225h13.9v13.9h-13.9zM593 225h13.9v13.9h-13.9zM609 225h13.9v13.9h-13.9zM625 225h13.9v13.9h-13.9zM641 225h13.9v13.9h-13.9zM433 241h13.9v13.9h-13.9zM449 241h13.9v13.9h-13.9zM465 241h13.9v13.9h-13.9zM481 241h13.9v13.9h-13.9zM497 241h13.9v13.9h-13.9zM513 241h13.9v13.9h-13.9zM529 241h13.9v13.9h-13.9zM545 241h13.9v13.9h-13.9zM561 241h13.9v13.9h-13.9zM577 241h13.9v13.9h-13.9zM593 241h13.9v13.9h-13.9zM609 241h13.9v13.9h-13.9zM625 241h13.9v13.9h-13.9zM641 241h13.9v13.9h-13.9zM433 257h13.9v13.9h-13.9zM449 257h13.9v13.9h-13.9zM465 257h13.9v13.9h-13.9zM481 257h13.9v13.9h-13.9zM497 257h13.9v13.9h-13.9zM513 257h13.9v13.9h-13.9zM529 257h13.9v13.9h-13.9zM545 257h13.9v13.9h-13.9zM561 257h13.9v13.9h-13.9zM577 257h13.9v13.9h-13.9zM593 257h13.9v13.9h-13.9zM609 257h13.9v13.9h-13.9zM625 257h13.9v13.9h-13.9zM641 257h13.9v13.9h-13.9zM433 273h13.9v13.9h-13.9zM449 273h13.9v13.9h-13.9zM465 273h13.9v13.9h-13.9zM481 273h13.9v13.9h-13.9zM497 273h13.9v13.9h-13.9zM513 273h13.9v13.9h-13.9zM529 273h13.9v13.9h-13.9zM545 273h13.9v13.9h-13.9zM561 273h13.9v13.9h-13.9zM577 273h13.9v13.9h-13.9zM593 273h13.9v13.9h-13.9zM609 273h13.9v13.9h-13.9zM625 273h13.9v13.9h-13.9zM641 273h13.9v13.9h-13.9zM433 289h13.9v13.9h-13.9zM449 289h13.9v13.9h-13.9zM465 289h13.9v13.9h-13.9zM481 289h13.9v13.9h-13.9zM497 289h13.9v13.9h-13.9zM513 289h13.9v13.9h-13.9zM529 289h13.9v13.9h-13.9zM545 289h13.9v13.9h-13.9zM561 289h13.9v13.9h-13.9zM577 289h13.9v13.9h-13.9zM593 289h13.9v13.9h-13.9zM609 289h13.9v13.9h-13.9zM625 289h13.9v13.9h-13.9zM641 289h13.9v13.9h-13.9z" fill="var(--sqk-logo-blue)" />
+</svg>
+    </a>
+    Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Home
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whitepaper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Whitepaper
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <a href="../../start/" class="md-nav__link docs-section-link " id="__nav_3_label" aria-controls="__nav_3_nav" aria-expanded="false">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Start here
+
+    
+  </span>
+  
+  
+
+            
+              <span class="md-nav__icon md-icon" aria-hidden="true"></span>
+            
+          </a>
+        
+        
+          <nav class="md-nav" id="__nav_3_nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Start here
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  What is Squeekchain?
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/how-it-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  How it works
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Frequently asked questions
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Glossary
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <a href="../../system/" class="md-nav__link docs-section-link " id="__nav_4_label" aria-controls="__nav_4_nav" aria-expanded="false">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Squeekchain 101
+
+    
+  </span>
+  
+  
+
+            
+              <span class="md-nav__icon md-icon" aria-hidden="true"></span>
+            
+          </a>
+        
+        
+          <nav class="md-nav" id="__nav_4_nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Squeekchain 101
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../system/squeektoshi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Squeektoshi
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../system/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  The WHEELY9000
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../system/measurement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Measuring wheel activity
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../system/rounds-and-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Rounds and Squeek blocks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../system/settlement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  How work reaches Ethereum
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../system/components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Components and responsibilities
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <a href="../../squeeks/" class="md-nav__link docs-section-link " id="__nav_5_label" aria-controls="__nav_5_nav" aria-expanded="false">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Squeeks
+
+    
+  </span>
+  
+  
+
+            
+              <span class="md-nav__icon md-icon" aria-hidden="true"></span>
+            
+          </a>
+        
+        
+          <nav class="md-nav" id="__nav_5_nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_5">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Squeeks
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../squeeks/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  How Squeeks earn
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../squeeks/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Power
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../squeeks/minting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Getting a Squeek
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../squeeks/ownership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Ownership and transfers
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../squeeks/merge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Merging Squeeks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <a href="../../rewards/" class="md-nav__link docs-section-link " id="__nav_6_label" aria-controls="__nav_6_nav" aria-expanded="false">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SQK & Tokenomics
+
+    
+  </span>
+  
+  
+
+            
+              <span class="md-nav__icon md-icon" aria-hidden="true"></span>
+            
+          </a>
+        
+        
+          <nav class="md-nav" id="__nav_6_nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  SQK & Tokenomics
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rewards/token/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  The SQK token
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rewards/creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  How SQK is issued
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rewards/staking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Staking
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rewards/checkpoints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Checkpoints
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rewards/claim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Claiming rewards
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rewards/supply-and-rounding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Supply limits and rounding
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rewards/squeekfi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SqueekFi
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <a href="../" class="md-nav__link docs-section-link " id="__nav_7_label" aria-controls="__nav_7_nav" aria-expanded="true">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Developers
+
+    
+  </span>
+  
+  
+
+            
+              <span class="md-nav__icon md-icon" aria-hidden="true"></span>
+            
+          </a>
+        
+        
+          <nav class="md-nav" id="__nav_7_nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_7">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Developers
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Quickstart
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Quickstart
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        TL;DR
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#before-you-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Before you start
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Steps
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Verify the deployment
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-squeekcore-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Read SqueekCore state
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Expected result
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Common failures
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-the-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Verify the result
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Related pages
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SqueekCore
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SqueekMining
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../token/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SqueekToken
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SqueekNFT
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dotgrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  DotGrid renderer
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  API
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../owner-actions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Build owner actions
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index-events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Index events
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build-with-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Build with AI
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <a href="../../security/" class="md-nav__link docs-section-link " id="__nav_8_label" aria-controls="__nav_8_nav" aria-expanded="false">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Security and trust
+
+    
+  </span>
+  
+  
+
+            
+              <span class="md-nav__icon md-icon" aria-hidden="true"></span>
+            
+          </a>
+        
+        
+          <nav class="md-nav" id="__nav_8_nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_8">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Security and trust
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/proof-limits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  What the system proves
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Roles and permissions
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Governance and upgrades
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/availability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Pauses and unavailable services
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Privacy
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        TL;DR
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#before-you-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Before you start
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Steps
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Verify the deployment
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-squeekcore-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Read SqueekCore state
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Expected result
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Common failures
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-the-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Verify the result
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Related pages
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Developers
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+  
+  
+  
+  
+  
+    <div class="docs-page-context">
+      
+        
+        <span class="docs-page-label" aria-label="Page type">Integration guide</span>
+      
+      
+        <span class="docs-page-actions">
+          <button type="button" class="docs-page-action" data-docs-copy-page="../quickstart.md">Copy page</button>
+          <a class="docs-page-action" href="../quickstart.md" type="text/markdown">View as Markdown</a>
+        </span>
+      
+    </div>
+  
+  
+                  
+
+
+<h1 id="quickstart">Quickstart<a class="headerlink" href="#quickstart" title="Link to this section">Link to this section</a></h1>
+<div class="docs-tldr">
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Link to this section">Link to this section</a></h2>
+<ul>
+<li>Three files: <code>setup.ts</code> connects at one Ethereum block, <code>verify.ts</code> checks the whole contract graph, <code>read-core.ts</code> reads SqueekCore.</li>
+<li>Every other example on this site imports the first two, so start here.</li>
+<li>Everything is read-only; nothing is signed or sent.</li>
+</ul>
+</div>
+<h2 id="before-you-start">Before you start<a class="headerlink" href="#before-you-start" title="Link to this section">Link to this section</a></h2>
+<p>You need:</p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Where it comes from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RPC endpoint with historical state</td>
+<td>Your node or provider; it must serve reads at a past block</td>
+</tr>
+<tr>
+<td>Chain ID and Ethereum block</td>
+<td>Your confirmation policy; read everything at this one block</td>
+</tr>
+<tr>
+<td>Proxy addresses</td>
+<td><a href="../#deployments">Deployments</a> for SqueekCore, SqueekMining, SqueekToken and SqueekNFT</td>
+</tr>
+<tr>
+<td>Expected identities</td>
+<td>The <code>sepolia-env.sh</code> block on the same page: implementation address, runtime hash, layout digest and proxy admin for each proxy</td>
+</tr>
+</tbody>
+</table>
+<p>Use the ABI for the implementation version you verify. SqueekCore V3 and SqueekMining version 6 change tuples and events, so decoding them with an earlier ABI is unsafe even where selectors match.</p>
+<p>The examples use TypeScript with viem 2 as ES modules (for example <code>bun</code> or <code>tsx</code>). Each one imports this shared setup:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// setup.ts</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createPublicClient</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"viem"</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`Supply </span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createPublicClient</span><span class="p">({</span><span class="w"> </span><span class="nx">transport</span><span class="o">:</span><span class="w"> </span><span class="kt">http</span><span class="p">(</span><span class="nx">required</span><span class="p">(</span><span class="s2">"RPC_URL"</span><span class="p">))</span><span class="w"> </span><span class="p">});</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">BigInt</span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">getChainId</span><span class="p">())</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nb">BigInt</span><span class="p">(</span><span class="nx">required</span><span class="p">(</span><span class="s2">"EXPECTED_CHAIN_ID"</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">"Chain mismatch"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">blockNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">BigInt</span><span class="p">(</span><span class="nx">required</span><span class="p">(</span><span class="s2">"ETHEREUM_BLOCK"</span><span class="p">));</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">block</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">getBlock</span><span class="p">({</span><span class="w"> </span><span class="nx">blockNumber</span><span class="w"> </span><span class="p">});</span>
+</code></pre></div>
+<p>Load the values with <code>set -a; . ./sepolia-env.sh; set +a</code>, then set <code>RPC_URL</code> to a Sepolia endpoint that serves historical state and <code>ETHEREUM_BLOCK</code> to a confirmed block. Run each file with <code>bun &lt;file&gt;</code> or <code>npx tsx &lt;file&gt;</code>.</p>
+<h2 id="steps">Steps<a class="headerlink" href="#steps" title="Link to this section">Link to this section</a></h2>
+<h3 id="verify-the-deployment">Verify the deployment<a class="headerlink" href="#verify-the-deployment" title="Link to this section">Link to this section</a></h3>
+<ol>
+<li>Read each proxy's EIP-1967 implementation and admin slots at the selected block.</li>
+<li>Compare the implementation address, the keccak256 of its runtime code, the proxy admin and the storage-layout digest with the deployment record.</li>
+<li>Check the implementation version: <code>3</code> for SqueekCore and <code>6</code> for SqueekMining. The EIP-712 domain version of <code>1</code> is a different identity.</li>
+<li>Check the connections: SqueekMining's <code>core()</code> is the SqueekCore proxy, SqueekToken's <code>mining()</code> is the SqueekMining proxy, and SqueekMining's <code>collectionPolicy(0)</code> names the SqueekNFT address.</li>
+<li>Compare SqueekCore <code>configuration()</code> with the <a href="../#launch-configuration">launch configuration</a>: stream, genesis, Guardian, Reporter and work cap. Check that each proxy admin is owned by the governance timelock. Stop on any mismatch; never substitute a default.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">// verify.ts</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">getAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">,</span><span class="w"> </span><span class="nx">parseAbi</span><span class="p">,</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">Address</span><span class="p">,</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">Hex</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"viem"</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">blockNumber</span><span class="p">,</span><span class="w"> </span><span class="nx">client</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"./setup"</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">IMPLEMENTATION_SLOT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc"</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">ADMIN_SLOT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103"</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">identityAbi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parseAbi</span><span class="p">([</span>
+<span class="w">  </span><span class="s2">"function implementationCodeAddress() view returns (address)"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"function implementationCodeVersion() view returns (uint64)"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"function implementationStorageLayoutDigest() view returns (bytes32)"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"function owner() view returns (address)"</span><span class="p">,</span>
+<span class="p">]);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">slotAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">word</span><span class="o">:</span><span class="w"> </span><span class="kt">Hex</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">getAddress</span><span class="p">(</span><span class="sb">`0x</span><span class="si">${</span><span class="p">(</span><span class="nx">word</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">"0x"</span><span class="p">).</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mf">40</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">a</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">b</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">verifyProxy</span><span class="p">(</span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">"CORE"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s2">"MINING"</span><span class="p">,</span><span class="w"> </span><span class="nx">version</span><span class="o">:</span><span class="w"> </span><span class="kt">bigint</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Address</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">proxy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getAddress</span><span class="p">(</span><span class="nx">required</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">_ADDRESS`</span><span class="p">));</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">implementation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">slotAddress</span><span class="p">(</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">getStorageAt</span><span class="p">({</span><span class="w"> </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="kt">proxy</span><span class="p">,</span><span class="w"> </span><span class="nx">slot</span><span class="o">:</span><span class="w"> </span><span class="kt">IMPLEMENTATION_SLOT</span><span class="p">,</span><span class="w"> </span><span class="nx">blockNumber</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">slotAddress</span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">getStorageAt</span><span class="p">({</span><span class="w"> </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="kt">proxy</span><span class="p">,</span><span class="w"> </span><span class="nx">slot</span><span class="o">:</span><span class="w"> </span><span class="kt">ADMIN_SLOT</span><span class="p">,</span><span class="w"> </span><span class="nx">blockNumber</span><span class="w"> </span><span class="p">}));</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">adminOwner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">readContract</span><span class="p">({</span><span class="w"> </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="kt">admin</span><span class="p">,</span><span class="w"> </span><span class="nx">abi</span><span class="o">:</span><span class="w"> </span><span class="kt">identityAbi</span><span class="p">,</span><span class="w"> </span><span class="nx">functionName</span><span class="o">:</span><span class="w"> </span><span class="s2">"owner"</span><span class="p">,</span><span class="w"> </span><span class="nx">blockNumber</span><span class="w"> </span><span class="p">});</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">getCode</span><span class="p">({</span><span class="w"> </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="kt">implementation</span><span class="p">,</span><span class="w"> </span><span class="nx">blockNumber</span><span class="w"> </span><span class="p">});</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="kt">proxy</span><span class="p">,</span><span class="w"> </span><span class="nx">abi</span><span class="o">:</span><span class="w"> </span><span class="kt">identityAbi</span><span class="p">,</span><span class="w"> </span><span class="nx">blockNumber</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="kd">const</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">reported</span><span class="p">,</span><span class="w"> </span><span class="nx">codeVersion</span><span class="p">,</span><span class="w"> </span><span class="nx">layout</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span>
+<span class="w">    </span><span class="nx">client</span><span class="p">.</span><span class="nx">readContract</span><span class="p">({</span><span class="w"> </span><span class="p">...</span><span class="nx">read</span><span class="p">,</span><span class="w"> </span><span class="nx">functionName</span><span class="o">:</span><span class="w"> </span><span class="s2">"implementationCodeAddress"</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">    </span><span class="nx">client</span><span class="p">.</span><span class="nx">readContract</span><span class="p">({</span><span class="w"> </span><span class="p">...</span><span class="nx">read</span><span class="p">,</span><span class="w"> </span><span class="nx">functionName</span><span class="o">:</span><span class="w"> </span><span class="s2">"implementationCodeVersion"</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">    </span><span class="nx">client</span><span class="p">.</span><span class="nx">readContract</span><span class="p">({</span><span class="w"> </span><span class="p">...</span><span class="nx">read</span><span class="p">,</span><span class="w"> </span><span class="nx">functionName</span><span class="o">:</span><span class="w"> </span><span class="s2">"implementationStorageLayoutDigest"</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">  </span><span class="p">]);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="o">!</span><span class="nx">same</span><span class="p">(</span><span class="nx">implementation</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="p">(</span><span class="sb">`EXPECTED_</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">_IMPLEMENTATION`</span><span class="p">))</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="o">!</span><span class="nx">same</span><span class="p">(</span><span class="nx">reported</span><span class="p">,</span><span class="w"> </span><span class="nx">implementation</span><span class="p">)</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="o">!</span><span class="nx">code</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="nx">same</span><span class="p">(</span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">code</span><span class="p">),</span><span class="w"> </span><span class="nx">required</span><span class="p">(</span><span class="sb">`EXPECTED_</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">_RUNTIME_HASH`</span><span class="p">))</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="o">!</span><span class="nx">same</span><span class="p">(</span><span class="nx">admin</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="p">(</span><span class="sb">`EXPECTED_</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">_PROXY_ADMIN`</span><span class="p">))</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="o">!</span><span class="nx">same</span><span class="p">(</span><span class="nx">layout</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="p">(</span><span class="sb">`EXPECTED_</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">_LAYOUT_DIGEST`</span><span class="p">))</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="o">!</span><span class="nx">same</span><span class="p">(</span><span class="nx">adminOwner</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="p">(</span><span class="s2">"EXPECTED_TIMELOCK"</span><span class="p">))</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="nx">codeVersion</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">version</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">: deployment does not match the approved record`</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">proxy</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">verifyGraph</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">core</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">verifyProxy</span><span class="p">(</span><span class="s2">"CORE"</span><span class="p">,</span><span class="w"> </span><span class="mi">3n</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">mining</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">verifyProxy</span><span class="p">(</span><span class="s2">"MINING"</span><span class="p">,</span><span class="w"> </span><span class="mi">6n</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getAddress</span><span class="p">(</span><span class="nx">required</span><span class="p">(</span><span class="s2">"SQK_ADDRESS"</span><span class="p">));</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">nft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getAddress</span><span class="p">(</span><span class="nx">required</span><span class="p">(</span><span class="s2">"NFT_ADDRESS"</span><span class="p">));</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">links</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parseAbi</span><span class="p">([</span>
+<span class="w">    </span><span class="s2">"function core() view returns (address)"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"function mining() view returns (address)"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"function collectionPolicy(uint8 collection) view returns ((address nft, uint16 maxSupply, uint8 maximumLevel, (uint64 weight, uint64 cooldownBlocks)[] levels))"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"function configuration() view returns ((bytes32 streamId, uint64 genesisTimestamp, uint64 roundDuration, uint64 maxWorkPerRound, uint16 maxRoundsPerBatch, address guardian, address reporter, uint32 initialWorkPerThousandBlocks, uint64 targetBlocksPerActiveRound, uint64 difficultySmoothingRounds, uint96 blockUnitsPerBlock))"</span><span class="p">,</span>
+<span class="w">  </span><span class="p">]);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">miningCore</span><span class="p">,</span><span class="w"> </span><span class="nx">tokenMining</span><span class="p">,</span><span class="w"> </span><span class="nx">policy</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span>
+<span class="w">    </span><span class="nx">client</span><span class="p">.</span><span class="nx">readContract</span><span class="p">({</span><span class="w"> </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="kt">mining</span><span class="p">,</span><span class="w"> </span><span class="nx">abi</span><span class="o">:</span><span class="w"> </span><span class="kt">links</span><span class="p">,</span><span class="w"> </span><span class="nx">functionName</span><span class="o">:</span><span class="w"> </span><span class="s2">"core"</span><span class="p">,</span><span class="w"> </span><span class="nx">blockNumber</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">    </span><span class="nx">client</span><span class="p">.</span><span class="nx">readContract</span><span class="p">({</span><span class="w"> </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="kt">token</span><span class="p">,</span><span class="w"> </span><span class="nx">abi</span><span class="o">:</span><span class="w"> </span><span class="kt">links</span><span class="p">,</span><span class="w"> </span><span class="nx">functionName</span><span class="o">:</span><span class="w"> </span><span class="s2">"mining"</span><span class="p">,</span><span class="w"> </span><span class="nx">blockNumber</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">    </span><span class="nx">client</span><span class="p">.</span><span class="nx">readContract</span><span class="p">({</span><span class="w"> </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="kt">mining</span><span class="p">,</span><span class="w"> </span><span class="nx">abi</span><span class="o">:</span><span class="w"> </span><span class="kt">links</span><span class="p">,</span><span class="w"> </span><span class="nx">functionName</span><span class="o">:</span><span class="w"> </span><span class="s2">"collectionPolicy"</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0</span><span class="p">],</span><span class="w"> </span><span class="nx">blockNumber</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">    </span><span class="nx">client</span><span class="p">.</span><span class="nx">readContract</span><span class="p">({</span><span class="w"> </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="kt">core</span><span class="p">,</span><span class="w"> </span><span class="nx">abi</span><span class="o">:</span><span class="w"> </span><span class="kt">links</span><span class="p">,</span><span class="w"> </span><span class="nx">functionName</span><span class="o">:</span><span class="w"> </span><span class="s2">"configuration"</span><span class="p">,</span><span class="w"> </span><span class="nx">blockNumber</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">  </span><span class="p">]);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">same</span><span class="p">(</span><span class="nx">miningCore</span><span class="p">,</span><span class="w"> </span><span class="nx">core</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="nx">same</span><span class="p">(</span><span class="nx">tokenMining</span><span class="p">,</span><span class="w"> </span><span class="nx">mining</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="nx">same</span><span class="p">(</span><span class="nx">policy</span><span class="p">.</span><span class="nx">nft</span><span class="p">,</span><span class="w"> </span><span class="nx">nft</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">"Contracts are not connected as one graph"</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="o">!</span><span class="nx">same</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">streamId</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="p">(</span><span class="s2">"EXPECTED_STREAM_ID"</span><span class="p">))</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="nx">config</span><span class="p">.</span><span class="nx">genesisTimestamp</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nb">BigInt</span><span class="p">(</span><span class="nx">required</span><span class="p">(</span><span class="s2">"EXPECTED_GENESIS_TIMESTAMP"</span><span class="p">))</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="o">!</span><span class="nx">same</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">guardian</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="p">(</span><span class="s2">"EXPECTED_GUARDIAN"</span><span class="p">))</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="o">!</span><span class="nx">same</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">reporter</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="p">(</span><span class="s2">"EXPECTED_REPORTER"</span><span class="p">))</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="nx">config</span><span class="p">.</span><span class="nx">maxWorkPerRound</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nb">BigInt</span><span class="p">(</span><span class="nx">required</span><span class="p">(</span><span class="s2">"EXPECTED_MAX_WORK_PER_ROUND"</span><span class="p">))</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">"SqueekCore configuration does not match the launch configuration"</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">core</span><span class="p">,</span><span class="w"> </span><span class="nx">mining</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">nft</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The snippet checks code identity, governance ownership and launch configuration, not intent: a matching value is only as trustworthy as the record that supplied it.</p>
+<h3 id="read-squeekcore-state">Read SqueekCore state<a class="headerlink" href="#read-squeekcore-state" title="Link to this section">Link to this section</a></h3>
+<ol>
+<li>Read <code>configuration()</code> and <code>state()</code> at the selected block.</li>
+<li>Check that <code>blockHeight</code> and <code>blockProgress</code> equal <code>cumulativeBlockUnits</code> divided by and modulo <code>blockUnitsPerBlock</code>.</li>
+<li>For history, read <code>roundPage</code> and advance your cursor to the returned <code>certifiedThroughRound</code>, not the requested end.</li>
+<li>Use <code>blockInfo(b)</code> for the completion round and work threshold of completed block <code>b</code>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">// read-core.ts</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">parseAbi</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"viem"</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">block</span><span class="p">,</span><span class="w"> </span><span class="nx">blockNumber</span><span class="p">,</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"./setup"</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">verifyGraph</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"./verify"</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">core</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">verifyGraph</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">abi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parseAbi</span><span class="p">([</span>
+<span class="w">  </span><span class="s2">"function configuration() view returns ((bytes32 streamId, uint64 genesisTimestamp, uint64 roundDuration, uint64 maxWorkPerRound, uint16 maxRoundsPerBatch, address guardian, address reporter, uint32 initialWorkPerThousandBlocks, uint64 targetBlocksPerActiveRound, uint64 difficultySmoothingRounds, uint96 blockUnitsPerBlock))"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"function state() view returns ((uint64 settledThroughRound, uint64 cumulativeWork, uint96 cumulativeBlockUnits, uint64 blockHeight, uint96 blockProgress, uint32 workPerThousandBlocks, uint256 authorizationNonce, bool paused))"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"function roundPage(uint64 afterRound, uint64 throughRound, uint256 maxRecords) view returns ((uint64 certifiedThroughRound, (uint64 cumulativeWork, uint96 cumulativeBlockUnits, uint32 workPerThousandBlocks) start, (uint64 cumulativeWork, uint96 cumulativeBlockUnits, uint32 workPerThousandBlocks) end, (uint64 roundId, uint64 cumulativeWork, uint96 cumulativeBlockUnits, uint32 workPerThousandBlocks, bytes32 dataHash)[] rounds))"</span><span class="p">,</span>
+<span class="p">]);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="kt">core</span><span class="p">,</span><span class="w"> </span><span class="nx">abi</span><span class="p">,</span><span class="w"> </span><span class="nx">blockNumber</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="kd">const</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">readContract</span><span class="p">({</span><span class="w"> </span><span class="p">...</span><span class="nx">read</span><span class="p">,</span><span class="w"> </span><span class="nx">functionName</span><span class="o">:</span><span class="w"> </span><span class="s2">"configuration"</span><span class="w"> </span><span class="p">});</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">readContract</span><span class="p">({</span><span class="w"> </span><span class="p">...</span><span class="nx">read</span><span class="p">,</span><span class="w"> </span><span class="nx">functionName</span><span class="o">:</span><span class="w"> </span><span class="s2">"state"</span><span class="w"> </span><span class="p">});</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">config</span><span class="p">.</span><span class="nx">blockUnitsPerBlock</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">blockHeight</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">cumulativeBlockUnits</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">units</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">blockProgress</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">cumulativeBlockUnits</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nx">units</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">"Inconsistent block units"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">frontier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">settledThroughRound</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">readContract</span><span class="p">({</span><span class="w"> </span><span class="p">...</span><span class="nx">read</span><span class="p">,</span><span class="w"> </span><span class="nx">functionName</span><span class="o">:</span><span class="w"> </span><span class="s2">"roundPage"</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">frontier</span><span class="p">,</span><span class="w"> </span><span class="nx">frontier</span><span class="p">,</span><span class="w"> </span><span class="mi">0n</span><span class="p">]</span><span class="w"> </span><span class="p">});</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="nx">point</span><span class="p">.</span><span class="nx">certifiedThroughRound</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">frontier</span><span class="w"> </span><span class="o">||</span>
+<span class="w">  </span><span class="nx">point</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">cumulativeBlockUnits</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">cumulativeBlockUnits</span><span class="w"> </span><span class="o">||</span>
+<span class="w">  </span><span class="nx">point</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">workPerThousandBlocks</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">workPerThousandBlocks</span>
+<span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">"Inconsistent frontier endpoint"</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">currentRound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">config</span><span class="p">.</span><span class="nx">genesisTimestamp</span>
+<span class="w">  </span><span class="o">?</span><span class="w"> </span><span class="mi">0n</span>
+<span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">config</span><span class="p">.</span><span class="nx">genesisTimestamp</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">config</span><span class="p">.</span><span class="nx">roundDuration</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1n</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">({</span><span class="w"> </span><span class="nx">blockNumber</span><span class="p">,</span><span class="w"> </span><span class="nx">blockHash</span><span class="o">:</span><span class="w"> </span><span class="kt">block.hash</span><span class="p">,</span><span class="w"> </span><span class="nx">currentRound</span><span class="p">,</span><span class="w"> </span><span class="nx">frontier</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="kt">state.blockHeight</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="w"> </span><span class="p">});</span>
+</code></pre></div>
+<h2 id="expected-result">Expected result<a class="headerlink" href="#expected-result" title="Link to this section">Link to this section</a></h2>
+<p><code>read-core.ts</code> prints the Ethereum block and hash, the current round by wall clock, the certified frontier (<code>settledThroughRound</code>), the completed Squeek block height, and the full <code>state()</code> tuple. Field meanings are in <a href="../core/#views">SqueekCore views</a>.</p>
+<p>The frontier normally trails the current round: rounds are settled in batches after they close and are verified. A frontier far behind means settlement is delayed, not that work was lost.</p>
+<h2 id="common-failures">Common failures<a class="headerlink" href="#common-failures" title="Link to this section">Link to this section</a></h2>
+<table>
+<thead>
+<tr>
+<th>Failure</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Chain mismatch</code></td>
+<td><code>RPC_URL</code> points at another network</td>
+<td>Use a Sepolia endpoint</td>
+</tr>
+<tr>
+<td><code>deployment does not match the approved record</code></td>
+<td>Wrong address, an upgrade since the record, or a stale <code>sepolia-env.sh</code></td>
+<td>Compare with <a href="../#deployments">Deployments</a>; stop if the record is current</td>
+</tr>
+<tr>
+<td><code>Contracts are not connected as one graph</code></td>
+<td>Addresses from different deployments</td>
+<td>Use one deployment's addresses</td>
+</tr>
+<tr>
+<td>Historical read fails</td>
+<td>The endpoint does not serve state at <code>ETHEREUM_BLOCK</code></td>
+<td>Use an archive-capable endpoint or a recent block</td>
+</tr>
+<tr>
+<td>Wrong tuple fields or decode error</td>
+<td>An earlier ABI (V2 <code>workPerBlock</code>, <code>currentWork</code>, <code>currentRound()</code>)</td>
+<td>Use the published <a href="../core/#abi">SqueekCore ABI</a></td>
+</tr>
+<tr>
+<td>Block count is off</td>
+<td>Dividing physical work by difficulty</td>
+<td>Use <code>cumulativeBlockUnits / blockUnitsPerBlock</code></td>
+</tr>
+<tr>
+<td><code>roundPage</code> reverts</td>
+<td>Round is past the certified frontier</td>
+<td>Read at most <code>settledThroughRound</code></td>
+</tr>
+<tr>
+<td>Precision loss</td>
+<td>Converting <code>uint64</code> or wider values to <code>number</code></td>
+<td>Keep <code>bigint</code>; viem returns <code>number</code> only for <code>uint48</code> and narrower</td>
+</tr>
+</tbody>
+</table>
+<h2 id="verify-the-result">Verify the result<a class="headerlink" href="#verify-the-result" title="Link to this section">Link to this section</a></h2>
+<p>Record the chain ID, the proxy and implementation identities, the Ethereum block number and hash, and the ABI version with every result. Read the block again after your reads and confirm its hash is unchanged; that detects a reorganization during the read.</p>
+<p>Next: read Squeek positions with the <a href="../mining/#usage-example">SqueekMining usage example</a>, or prepare owner transactions in <a href="../owner-actions/">Build owner actions</a>.</p>
+<h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Link to this section">Link to this section</a></h2>
+<ul>
+<li><a href="../">Developers</a></li>
+<li><a href="../core/">SqueekCore</a></li>
+<li><a href="../mining/">SqueekMining</a></li>
+<li><a href="../owner-actions/">Build owner actions</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  <div hidden data-docs-definitions>
+    
+      <span id="docs-definition-contract-ProxyAdmin" data-docs-term="contract-ProxyAdmin" data-contract="ProxyAdmin" data-label="ProxyAdmin contract" data-reference="../../security/governance/#actors">Applies SqueekCore or SqueekMining upgrades authorized by its governing Timelock.</span>
+    
+      <span id="docs-definition-contract-Renderer" data-docs-term="contract-Renderer" data-contract="Renderer" data-label="Renderer contract" data-reference="../dotgrid/#overview">Generates Squeek images and metadata from fixed onchain visual data.</span>
+    
+      <span id="docs-definition-contract-SqueekCore" data-docs-term="contract-SqueekCore" data-contract="SqueekCore" data-label="SqueekCore contract" data-reference="../core/">Records physical work and earned block units on Ethereum, with difficulty adapting after active rounds.</span>
+    
+      <span id="docs-definition-contract-SqueekMining" data-docs-term="contract-SqueekMining" data-contract="SqueekMining" data-label="SqueekMining contract" data-reference="../mining/">Calculates rewards from settled work, holds funded SQK, and pays eligible NFT owners.</span>
+    
+      <span id="docs-definition-contract-SqueekNFT" data-docs-term="contract-SqueekNFT" data-contract="SqueekNFT" data-label="SqueekNFT contract" data-reference="../nft/">The Squeeks ERC-721 contract. Tracks NFT ownership and coordinates minting and merges with SqueekMining.</span>
+    
+      <span id="docs-definition-contract-SqueekToken" data-docs-term="contract-SqueekToken" data-contract="SqueekToken" data-label="SqueekToken contract" data-reference="../token/">The SQK ERC-20 contract. Enforces the lifetime supply cap; only SqueekMining can mint SQK.</span>
+    
+      <span id="docs-definition-contract-Timelock" data-docs-term="contract-Timelock" data-contract="Timelock" data-label="Timelock contract" data-reference="../../security/governance/#actors">Queues governance operations and enforces a delay before they can be executed.</span>
+    
+      <span id="docs-definition-contract-Validator" data-docs-term="contract-Validator" data-contract="Validator" data-label="Validator contract" data-reference="../dotgrid/#validate">Checks that visual data conforms to the required DotGrid format.</span>
+    
+    
+      <span id="docs-definition-activation" data-docs-term="activation" data-label="Activation" data-aliases="activation|activations" data-reference="../../squeeks/power/#when-does-new-power-start-earning">When new power starts earning. Minting and merging schedule it for the next round, and a checkpoint applies it.</span>
+    
+      <span id="docs-definition-checkpoint" data-docs-term="checkpoint" data-label="Checkpoint" data-aliases="checkpoint|checkpoints" data-reference="../../rewards/checkpoints/">A reward update that processes settled Squeek blocks, issues their SQK, and applies scheduled power changes.</span>
+    
+      <span id="docs-definition-donor" data-docs-term="donor" data-label="Donor" data-aliases="donor|donors" data-reference="../../squeeks/merge/#what-do-you-keep-and-what-do-you-lose">The Squeek permanently burned in a merge. Its unclaimed rewards move to the survivor, but its image is not combined or kept.</span>
+    
+      <span id="docs-definition-emissions" data-docs-term="emissions" data-label="Emissions" data-aliases="emissions|emission" data-reference="../../rewards/creation/">SQK issued as settled Squeek blocks are processed: 6,900 SQK for each completed block, up to the lifetime cap.</span>
+    
+      <span id="docs-definition-hamster-proof-of-work" data-docs-term="hamster-proof-of-work" data-label="Hamster proof of work" data-aliases="hamster proof of work|hamster proof-of-work" data-reference="../../security/proof-limits/#what-does-a-work-record-prove">Squeekchain&#x27;s record of accepted wheel-magnet passages.</span>
+    
+      <span id="docs-definition-merge" data-docs-term="merge" data-label="Merge" data-aliases="merge|merges|merging|merged" data-reference="../../squeeks/merge/">Combining two eligible same-level Squeeks you own into one higher-level Squeek. One NFT is burned; the survivor keeps both Squeeks&#x27; unclaimed rewards.</span>
+    
+      <span id="docs-definition-merge-cooldown" data-docs-term="merge-cooldown" data-label="Merge cooldown" data-aliases="merge cooldown|merge cooldowns" data-reference="../../squeeks/power/#when-can-you-merge-again">The completed Squeek blocks a Squeek waits through before it can merge again. It follows the Squeek through transfers.</span>
+    
+      <span id="docs-definition-power" data-docs-term="power" data-label="Power &#x2f; weight" data-aliases="active power|maximum power|weight|weights" data-reference="../../squeeks/power/">What a Squeek earns with. Its level sets its maximum power; each Squeek block&#x27;s SQK is divided across all active power in proportion.</span>
+    
+      <span id="docs-definition-round" data-docs-term="round" data-label="Round" data-aliases="round|rounds" data-reference="../../system/rounds-and-blocks/#round-boundaries" data-exclude-following="down|up|off">A ten-minute period used to group measured work. The device saves a completed round&#x27;s work total when measurement remained uninterrupted.</span>
+    
+      <span id="docs-definition-sqk" data-docs-term="sqk" data-label="SQK" data-aliases="SQK" data-reference="../../rewards/token/">The token each completed Squeek block issues, shared by active power. It has a lifetime supply cap.</span>
+    
+      <span id="docs-definition-squeek" data-docs-term="squeek" data-label="Squeek" data-aliases="Squeek NFT|Squeek NFTs" data-reference="../../squeeks/#whats-a-squeek">An NFT that owns a share of the Squeekchain network. It receives SQK from the hamster&#x27;s work according to its active power, set by its level and the SQK staked to it.</span>
+    
+      <span id="docs-definition-squeek-block" data-docs-term="squeek-block" data-label="Squeek block" data-aliases="Squeek block|Squeek blocks|Squeek-block|Squeek-blocks" data-reference="../../system/rounds-and-blocks/#how-work-becomes-blocks">One billion block units earned from settled work at each round&#x27;s difficulty. Completed blocks supply SQK under the mining reward rules.</span>
+    
+      <span id="docs-definition-squeekfi" data-docs-term="squeekfi" data-label="SqueekFi" data-aliases="SqueekFi" data-reference="../../rewards/squeekfi/">Squeekchain&#x27;s ecosystem for hamster-powered onchain finance, built on the public work record.</span>
+    
+      <span id="docs-definition-survivor" data-docs-term="survivor" data-label="Survivor" data-aliases="survivor|survivors" data-reference="../../squeeks/merge/#what-do-you-keep-and-what-do-you-lose">The Squeek you keep in a merge. It gains a level, keeps its ID and image, and receives both Squeeks&#x27; unclaimed rewards.</span>
+    
+      <span id="docs-definition-unclaimed-rewards" data-docs-term="unclaimed-rewards" data-label="Unclaimed rewards" data-aliases="unclaimed rewards|unclaimed reward" data-reference="../../squeeks/ownership/#what-goes-to-the-new-owner">A Squeek&#x27;s recorded reward balance that hasn&#x27;t been paid to a wallet. It stays with the Squeek when ownership changes.</span>
+    
+      <span id="docs-definition-wheely9000" data-docs-term="wheely9000" data-label="WHEELY9000" data-aliases="WHEELY9000" data-reference="../../system/installation/">The hamster mining device. It records accepted wheel-magnet passages as work.</span>
+    
+      <span id="docs-definition-work-unit" data-docs-term="work-unit" data-label="Work unit &#x2f; accepted passage" data-aliases="work unit|work units|accepted passage|accepted passages|accepted magnet passage|accepted magnet passages|accepted wheel-magnet passage|accepted wheel-magnet passages" data-reference="../../system/measurement/#what-it-is">One wheel-magnet passage that met the device&#x27;s counting rules.</span>
+    
+  </div>
+  <div id="docs-tooltip" class="docs-tooltip" role="tooltip" popover="manual"></div>
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Developers">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Developers
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../core/" class="md-footer__link md-footer__link--next" aria-label="Next: SqueekCore">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                SqueekCore
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog" role="status" aria-atomic="true">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.instant.progress","navigation.indexes","navigation.path","navigation.footer","navigation.top","content.code.copy","search.highlight","search.suggest"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","clipboard.error":"Could not copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.67a597eb.min.js"></script>
+      
+        <script src="../../assets/javascripts/navigation.js"></script>
+      
+        <script src="../../assets/javascripts/tooltips.js"></script>
+      
+        <script src="../../assets/javascripts/tables.js"></script>
+      
+        <script src="../../assets/javascripts/page-actions.js"></script>
+      
+        <script src="../../assets/javascripts/whitepaper.js"></script>
+      
+    
+  <script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a51c203e1ecbb642',t:'MTc5MzIxMzQyNA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

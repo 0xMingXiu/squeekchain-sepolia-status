@@ -1,0 +1,2488 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Squeekchain's Sepolia contract addresses, published ABIs, integration rules, and where to start building.">
+      
+      
+        <meta name="author" content="Squeekchain">
+      
+      
+        <link rel="canonical" href="https://docs.squeekchain.com/developers/">
+      
+      
+        <link rel="prev" href="../rewards/squeekfi/">
+      
+      
+        <link rel="next" href="./quickstart/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="zensical-0.0.67">
+    
+    
+  <title>Developers · Squeekchain Docs</title>
+
+    
+      
+        
+      
+      <link rel="stylesheet" href="../assets/stylesheets/modern/main.4ae390e2.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../assets/stylesheets/modern/palette.96d1a7e4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/docs.css">
+    
+      <link rel="stylesheet" href="../assets/whitepaper/whitepaper.css">
+    
+    <script>__md_scope=new URL("..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  
+  
+  
+  <meta name="theme-color" content="#1A1A20">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" sizes="180x180">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Squeekchain Docs">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Developers">
+  <meta property="og:description" content="Squeekchain's Sepolia contract addresses, published ABIs, integration rules, and where to start building.">
+  <meta property="og:url" content="https://docs.squeekchain.com/developers/">
+  <meta property="og:image" content="https://docs.squeekchain.com/assets/social/card.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1568">
+  <meta property="og:image:height" content="882">
+  <meta property="og:image:alt" content="Squeekchain mark: gold dot-matrix emblem and blue square-tile glyph on a dark dotted grid">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@squeekchain">
+  <meta name="twitter:title" content="Developers">
+  <meta name="twitter:description" content="Squeekchain's Sepolia contract addresses, published ABIs, integration rules, and where to start building.">
+  <meta name="twitter:image" content="https://docs.squeekchain.com/assets/social/card.png">
+  <meta name="twitter:image:alt" content="Squeekchain mark: gold dot-matrix emblem and blue square-tile glyph on a dark dotted grid">
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#developers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="./.." title="Docs" class="md-header__button md-logo" aria-label="Docs" data-md-component="logo">
+      
+<svg aria-hidden="true" class="docs-brand-logo" height="238" viewBox="73 73 590 238" width="590" xmlns="http://www.w3.org/2000/svg">
+  <path d="M145 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM81 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM401 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM81 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM401 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM81 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM401 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0z" fill="var(--sqk-logo-gold)" />
+  <path d="M433 81h13.9v13.9h-13.9zM449 81h13.9v13.9h-13.9zM465 81h13.9v13.9h-13.9zM481 81h13.9v13.9h-13.9zM497 81h13.9v13.9h-13.9zM513 81h13.9v13.9h-13.9zM529 81h13.9v13.9h-13.9zM545 81h13.9v13.9h-13.9zM561 81h13.9v13.9h-13.9zM577 81h13.9v13.9h-13.9zM593 81h13.9v13.9h-13.9zM609 81h13.9v13.9h-13.9zM625 81h13.9v13.9h-13.9zM641 81h13.9v13.9h-13.9zM433 97h13.9v13.9h-13.9zM449 97h13.9v13.9h-13.9zM465 97h13.9v13.9h-13.9zM481 97h13.9v13.9h-13.9zM497 97h13.9v13.9h-13.9zM513 97h13.9v13.9h-13.9zM529 97h13.9v13.9h-13.9zM545 97h13.9v13.9h-13.9zM561 97h13.9v13.9h-13.9zM577 97h13.9v13.9h-13.9zM593 97h13.9v13.9h-13.9zM609 97h13.9v13.9h-13.9zM625 97h13.9v13.9h-13.9zM641 97h13.9v13.9h-13.9zM433 113h13.9v13.9h-13.9zM449 113h13.9v13.9h-13.9zM465 113h13.9v13.9h-13.9zM481 113h13.9v13.9h-13.9zM497 113h13.9v13.9h-13.9zM513 113h13.9v13.9h-13.9zM529 113h13.9v13.9h-13.9zM545 113h13.9v13.9h-13.9zM561 113h13.9v13.9h-13.9zM577 113h13.9v13.9h-13.9zM593 113h13.9v13.9h-13.9zM609 113h13.9v13.9h-13.9zM625 113h13.9v13.9h-13.9zM641 113h13.9v13.9h-13.9zM433 129h13.9v13.9h-13.9zM449 129h13.9v13.9h-13.9zM465 129h13.9v13.9h-13.9zM481 129h13.9v13.9h-13.9zM497 129h13.9v13.9h-13.9zM513 129h13.9v13.9h-13.9zM529 129h13.9v13.9h-13.9zM545 129h13.9v13.9h-13.9zM561 129h13.9v13.9h-13.9zM577 129h13.9v13.9h-13.9zM593 129h13.9v13.9h-13.9zM609 129h13.9v13.9h-13.9zM625 129h13.9v13.9h-13.9zM641 129h13.9v13.9h-13.9zM433 145h13.9v13.9h-13.9zM449 145h13.9v13.9h-13.9zM465 145h13.9v13.9h-13.9zM481 145h13.9v13.9h-13.9zM497 145h13.9v13.9h-13.9zM513 145h13.9v13.9h-13.9zM529 145h13.9v13.9h-13.9zM545 145h13.9v13.9h-13.9zM561 145h13.9v13.9h-13.9zM577 145h13.9v13.9h-13.9zM593 145h13.9v13.9h-13.9zM609 145h13.9v13.9h-13.9zM625 145h13.9v13.9h-13.9zM641 145h13.9v13.9h-13.9zM433 161h13.9v13.9h-13.9zM449 161h13.9v13.9h-13.9zM465 161h13.9v13.9h-13.9zM481 161h13.9v13.9h-13.9zM497 161h13.9v13.9h-13.9zM513 161h13.9v13.9h-13.9zM529 161h13.9v13.9h-13.9zM545 161h13.9v13.9h-13.9zM561 161h13.9v13.9h-13.9zM577 161h13.9v13.9h-13.9zM593 161h13.9v13.9h-13.9zM609 161h13.9v13.9h-13.9zM625 161h13.9v13.9h-13.9zM641 161h13.9v13.9h-13.9zM433 177h13.9v13.9h-13.9zM449 177h13.9v13.9h-13.9zM465 177h13.9v13.9h-13.9zM481 177h13.9v13.9h-13.9zM497 177h13.9v13.9h-13.9zM513 177h13.9v13.9h-13.9zM529 177h13.9v13.9h-13.9zM545 177h13.9v13.9h-13.9zM561 177h13.9v13.9h-13.9zM577 177h13.9v13.9h-13.9zM593 177h13.9v13.9h-13.9zM609 177h13.9v13.9h-13.9zM625 177h13.9v13.9h-13.9zM641 177h13.9v13.9h-13.9zM433 193h13.9v13.9h-13.9zM449 193h13.9v13.9h-13.9zM465 193h13.9v13.9h-13.9zM481 193h13.9v13.9h-13.9zM497 193h13.9v13.9h-13.9zM513 193h13.9v13.9h-13.9zM529 193h13.9v13.9h-13.9zM545 193h13.9v13.9h-13.9zM561 193h13.9v13.9h-13.9zM577 193h13.9v13.9h-13.9zM593 193h13.9v13.9h-13.9zM609 193h13.9v13.9h-13.9zM625 193h13.9v13.9h-13.9zM641 193h13.9v13.9h-13.9zM433 209h13.9v13.9h-13.9zM449 209h13.9v13.9h-13.9zM465 209h13.9v13.9h-13.9zM481 209h13.9v13.9h-13.9zM497 209h13.9v13.9h-13.9zM513 209h13.9v13.9h-13.9zM529 209h13.9v13.9h-13.9zM545 209h13.9v13.9h-13.9zM561 209h13.9v13.9h-13.9zM577 209h13.9v13.9h-13.9zM593 209h13.9v13.9h-13.9zM609 209h13.9v13.9h-13.9zM625 209h13.9v13.9h-13.9zM641 209h13.9v13.9h-13.9zM433 225h13.9v13.9h-13.9zM449 225h13.9v13.9h-13.9zM465 225h13.9v13.9h-13.9zM481 225h13.9v13.9h-13.9zM497 225h13.9v13.9h-13.9zM513 225h13.9v13.9h-13.9zM529 225h13.9v13.9h-13.9zM545 225h13.9v13.9h-13.9zM561 225h13.9v13.9h-13.9zM577 225h13.9v13.9h-13.9zM593 225h13.9v13.9h-13.9zM609 225h13.9v13.9h-13.9zM625 225h13.9v13.9h-13.9zM641 225h13.9v13.9h-13.9zM433 241h13.9v13.9h-13.9zM449 241h13.9v13.9h-13.9zM465 241h13.9v13.9h-13.9zM481 241h13.9v13.9h-13.9zM497 241h13.9v13.9h-13.9zM513 241h13.9v13.9h-13.9zM529 241h13.9v13.9h-13.9zM545 241h13.9v13.9h-13.9zM561 241h13.9v13.9h-13.9zM577 241h13.9v13.9h-13.9zM593 241h13.9v13.9h-13.9zM609 241h13.9v13.9h-13.9zM625 241h13.9v13.9h-13.9zM641 241h13.9v13.9h-13.9zM433 257h13.9v13.9h-13.9zM449 257h13.9v13.9h-13.9zM465 257h13.9v13.9h-13.9zM481 257h13.9v13.9h-13.9zM497 257h13.9v13.9h-13.9zM513 257h13.9v13.9h-13.9zM529 257h13.9v13.9h-13.9zM545 257h13.9v13.9h-13.9zM561 257h13.9v13.9h-13.9zM577 257h13.9v13.9h-13.9zM593 257h13.9v13.9h-13.9zM609 257h13.9v13.9h-13.9zM625 257h13.9v13.9h-13.9zM641 257h13.9v13.9h-13.9zM433 273h13.9v13.9h-13.9zM449 273h13.9v13.9h-13.9zM465 273h13.9v13.9h-13.9zM481 273h13.9v13.9h-13.9zM497 273h13.9v13.9h-13.9zM513 273h13.9v13.9h-13.9zM529 273h13.9v13.9h-13.9zM545 273h13.9v13.9h-13.9zM561 273h13.9v13.9h-13.9zM577 273h13.9v13.9h-13.9zM593 273h13.9v13.9h-13.9zM609 273h13.9v13.9h-13.9zM625 273h13.9v13.9h-13.9zM641 273h13.9v13.9h-13.9zM433 289h13.9v13.9h-13.9zM449 289h13.9v13.9h-13.9zM465 289h13.9v13.9h-13.9zM481 289h13.9v13.9h-13.9zM497 289h13.9v13.9h-13.9zM513 289h13.9v13.9h-13.9zM529 289h13.9v13.9h-13.9zM545 289h13.9v13.9h-13.9zM561 289h13.9v13.9h-13.9zM577 289h13.9v13.9h-13.9zM593 289h13.9v13.9h-13.9zM609 289h13.9v13.9h-13.9zM625 289h13.9v13.9h-13.9zM641 289h13.9v13.9h-13.9z" fill="var(--sqk-logo-blue)" />
+</svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Developers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="./.." title="Docs" class="md-nav__button md-logo" aria-label="Docs" data-md-component="logo">
+      
+<svg aria-hidden="true" class="docs-brand-logo" height="238" viewBox="73 73 590 238" width="590" xmlns="http://www.w3.org/2000/svg">
+  <path d="M145 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 88a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 104a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 120a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 136a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 152a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 168a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 184a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 200a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM81 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM401 216a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM81 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM401 232a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM81 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM401 248a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM97 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM113 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM369 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM385 264a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM129 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM145 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM337 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM353 280a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM161 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM177 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM193 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM209 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM225 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM241 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM257 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM273 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM289 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM305 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM321 296a7 7 0 1 0 14 0a7 7 0 1 0 -14 0z" fill="var(--sqk-logo-gold)" />
+  <path d="M433 81h13.9v13.9h-13.9zM449 81h13.9v13.9h-13.9zM465 81h13.9v13.9h-13.9zM481 81h13.9v13.9h-13.9zM497 81h13.9v13.9h-13.9zM513 81h13.9v13.9h-13.9zM529 81h13.9v13.9h-13.9zM545 81h13.9v13.9h-13.9zM561 81h13.9v13.9h-13.9zM577 81h13.9v13.9h-13.9zM593 81h13.9v13.9h-13.9zM609 81h13.9v13.9h-13.9zM625 81h13.9v13.9h-13.9zM641 81h13.9v13.9h-13.9zM433 97h13.9v13.9h-13.9zM449 97h13.9v13.9h-13.9zM465 97h13.9v13.9h-13.9zM481 97h13.9v13.9h-13.9zM497 97h13.9v13.9h-13.9zM513 97h13.9v13.9h-13.9zM529 97h13.9v13.9h-13.9zM545 97h13.9v13.9h-13.9zM561 97h13.9v13.9h-13.9zM577 97h13.9v13.9h-13.9zM593 97h13.9v13.9h-13.9zM609 97h13.9v13.9h-13.9zM625 97h13.9v13.9h-13.9zM641 97h13.9v13.9h-13.9zM433 113h13.9v13.9h-13.9zM449 113h13.9v13.9h-13.9zM465 113h13.9v13.9h-13.9zM481 113h13.9v13.9h-13.9zM497 113h13.9v13.9h-13.9zM513 113h13.9v13.9h-13.9zM529 113h13.9v13.9h-13.9zM545 113h13.9v13.9h-13.9zM561 113h13.9v13.9h-13.9zM577 113h13.9v13.9h-13.9zM593 113h13.9v13.9h-13.9zM609 113h13.9v13.9h-13.9zM625 113h13.9v13.9h-13.9zM641 113h13.9v13.9h-13.9zM433 129h13.9v13.9h-13.9zM449 129h13.9v13.9h-13.9zM465 129h13.9v13.9h-13.9zM481 129h13.9v13.9h-13.9zM497 129h13.9v13.9h-13.9zM513 129h13.9v13.9h-13.9zM529 129h13.9v13.9h-13.9zM545 129h13.9v13.9h-13.9zM561 129h13.9v13.9h-13.9zM577 129h13.9v13.9h-13.9zM593 129h13.9v13.9h-13.9zM609 129h13.9v13.9h-13.9zM625 129h13.9v13.9h-13.9zM641 129h13.9v13.9h-13.9zM433 145h13.9v13.9h-13.9zM449 145h13.9v13.9h-13.9zM465 145h13.9v13.9h-13.9zM481 145h13.9v13.9h-13.9zM497 145h13.9v13.9h-13.9zM513 145h13.9v13.9h-13.9zM529 145h13.9v13.9h-13.9zM545 145h13.9v13.9h-13.9zM561 145h13.9v13.9h-13.9zM577 145h13.9v13.9h-13.9zM593 145h13.9v13.9h-13.9zM609 145h13.9v13.9h-13.9zM625 145h13.9v13.9h-13.9zM641 145h13.9v13.9h-13.9zM433 161h13.9v13.9h-13.9zM449 161h13.9v13.9h-13.9zM465 161h13.9v13.9h-13.9zM481 161h13.9v13.9h-13.9zM497 161h13.9v13.9h-13.9zM513 161h13.9v13.9h-13.9zM529 161h13.9v13.9h-13.9zM545 161h13.9v13.9h-13.9zM561 161h13.9v13.9h-13.9zM577 161h13.9v13.9h-13.9zM593 161h13.9v13.9h-13.9zM609 161h13.9v13.9h-13.9zM625 161h13.9v13.9h-13.9zM641 161h13.9v13.9h-13.9zM433 177h13.9v13.9h-13.9zM449 177h13.9v13.9h-13.9zM465 177h13.9v13.9h-13.9zM481 177h13.9v13.9h-13.9zM497 177h13.9v13.9h-13.9zM513 177h13.9v13.9h-13.9zM529 177h13.9v13.9h-13.9zM545 177h13.9v13.9h-13.9zM561 177h13.9v13.9h-13.9zM577 177h13.9v13.9h-13.9zM593 177h13.9v13.9h-13.9zM609 177h13.9v13.9h-13.9zM625 177h13.9v13.9h-13.9zM641 177h13.9v13.9h-13.9zM433 193h13.9v13.9h-13.9zM449 193h13.9v13.9h-13.9zM465 193h13.9v13.9h-13.9zM481 193h13.9v13.9h-13.9zM497 193h13.9v13.9h-13.9zM513 193h13.9v13.9h-13.9zM529 193h13.9v13.9h-13.9zM545 193h13.9v13.9h-13.9zM561 193h13.9v13.9h-13.9zM577 193h13.9v13.9h-13.9zM593 193h13.9v13.9h-13.9zM609 193h13.9v13.9h-13.9zM625 193h13.9v13.9h-13.9zM641 193h13.9v13.9h-13.9zM433 209h13.9v13.9h-13.9zM449 209h13.9v13.9h-13.9zM465 209h13.9v13.9h-13.9zM481 209h13.9v13.9h-13.9zM497 209h13.9v13.9h-13.9zM513 209h13.9v13.9h-13.9zM529 209h13.9v13.9h-13.9zM545 209h13.9v13.9h-13.9zM561 209h13.9v13.9h-13.9zM577 209h13.9v13.9h-13.9zM593 209h13.9v13.9h-13.9zM609 209h13.9v13.9h-13.9zM625 209h13.9v13.9h-13.9zM641 209h13.9v13.9h-13.9zM433 225h13.9v13.9h-13.9zM449 225h13.9v13.9h-13.9zM465 225h13.9v13.9h-13.9zM481 225h13.9v13.9h-13.9zM497 225h13.9v13.9h-13.9zM513 225h13.9v13.9h-13.9zM529 225h13.9v13.9h-13.9zM545 225h13.9v13.9h-13.9zM561 225h13.9v13.9h-13.9zM577 225h13.9v13.9h-13.9zM593 225h13.9v13.9h-13.9zM609 225h13.9v13.9h-13.9zM625 225h13.9v13.9h-13.9zM641 225h13.9v13.9h-13.9zM433 241h13.9v13.9h-13.9zM449 241h13.9v13.9h-13.9zM465 241h13.9v13.9h-13.9zM481 241h13.9v13.9h-13.9zM497 241h13.9v13.9h-13.9zM513 241h13.9v13.9h-13.9zM529 241h13.9v13.9h-13.9zM545 241h13.9v13.9h-13.9zM561 241h13.9v13.9h-13.9zM577 241h13.9v13.9h-13.9zM593 241h13.9v13.9h-13.9zM609 241h13.9v13.9h-13.9zM625 241h13.9v13.9h-13.9zM641 241h13.9v13.9h-13.9zM433 257h13.9v13.9h-13.9zM449 257h13.9v13.9h-13.9zM465 257h13.9v13.9h-13.9zM481 257h13.9v13.9h-13.9zM497 257h13.9v13.9h-13.9zM513 257h13.9v13.9h-13.9zM529 257h13.9v13.9h-13.9zM545 257h13.9v13.9h-13.9zM561 257h13.9v13.9h-13.9zM577 257h13.9v13.9h-13.9zM593 257h13.9v13.9h-13.9zM609 257h13.9v13.9h-13.9zM625 257h13.9v13.9h-13.9zM641 257h13.9v13.9h-13.9zM433 273h13.9v13.9h-13.9zM449 273h13.9v13.9h-13.9zM465 273h13.9v13.9h-13.9zM481 273h13.9v13.9h-13.9zM497 273h13.9v13.9h-13.9zM513 273h13.9v13.9h-13.9zM529 273h13.9v13.9h-13.9zM545 273h13.9v13.9h-13.9zM561 273h13.9v13.9h-13.9zM577 273h13.9v13.9h-13.9zM593 273h13.9v13.9h-13.9zM609 273h13.9v13.9h-13.9zM625 273h13.9v13.9h-13.9zM641 273h13.9v13.9h-13.9zM433 289h13.9v13.9h-13.9zM449 289h13.9v13.9h-13.9zM465 289h13.9v13.9h-13.9zM481 289h13.9v13.9h-13.9zM497 289h13.9v13.9h-13.9zM513 289h13.9v13.9h-13.9zM529 289h13.9v13.9h-13.9zM545 289h13.9v13.9h-13.9zM561 289h13.9v13.9h-13.9zM577 289h13.9v13.9h-13.9zM593 289h13.9v13.9h-13.9zM609 289h13.9v13.9h-13.9zM625 289h13.9v13.9h-13.9zM641 289h13.9v13.9h-13.9z" fill="var(--sqk-logo-blue)" />
+</svg>
+    </a>
+    Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Home
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whitepaper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Whitepaper
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <a href="../start/" class="md-nav__link docs-section-link " id="__nav_3_label" aria-controls="__nav_3_nav" aria-expanded="false">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Start here
+
+    
+  </span>
+  
+  
+
+            
+              <span class="md-nav__icon md-icon" aria-hidden="true"></span>
+            
+          </a>
+        
+        
+          <nav class="md-nav" id="__nav_3_nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Start here
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  What is Squeekchain?
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/how-it-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  How it works
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Frequently asked questions
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Glossary
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <a href="../system/" class="md-nav__link docs-section-link " id="__nav_4_label" aria-controls="__nav_4_nav" aria-expanded="false">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Squeekchain 101
+
+    
+  </span>
+  
+  
+
+            
+              <span class="md-nav__icon md-icon" aria-hidden="true"></span>
+            
+          </a>
+        
+        
+          <nav class="md-nav" id="__nav_4_nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Squeekchain 101
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system/squeektoshi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Squeektoshi
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  The WHEELY9000
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system/measurement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Measuring wheel activity
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system/rounds-and-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Rounds and Squeek blocks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system/settlement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  How work reaches Ethereum
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system/components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Components and responsibilities
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <a href="../squeeks/" class="md-nav__link docs-section-link " id="__nav_5_label" aria-controls="__nav_5_nav" aria-expanded="false">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Squeeks
+
+    
+  </span>
+  
+  
+
+            
+              <span class="md-nav__icon md-icon" aria-hidden="true"></span>
+            
+          </a>
+        
+        
+          <nav class="md-nav" id="__nav_5_nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_5">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Squeeks
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../squeeks/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  How Squeeks earn
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../squeeks/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Power
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../squeeks/minting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Getting a Squeek
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../squeeks/ownership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Ownership and transfers
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../squeeks/merge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Merging Squeeks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <a href="../rewards/" class="md-nav__link docs-section-link " id="__nav_6_label" aria-controls="__nav_6_nav" aria-expanded="false">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SQK & Tokenomics
+
+    
+  </span>
+  
+  
+
+            
+              <span class="md-nav__icon md-icon" aria-hidden="true"></span>
+            
+          </a>
+        
+        
+          <nav class="md-nav" id="__nav_6_nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  SQK & Tokenomics
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rewards/token/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  The SQK token
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rewards/creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  How SQK is issued
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rewards/staking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Staking
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rewards/checkpoints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Checkpoints
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rewards/claim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Claiming rewards
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rewards/supply-and-rounding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Supply limits and rounding
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rewards/squeekfi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SqueekFi
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <a href="././" class="md-nav__link docs-section-link md-nav__link--active" id="__nav_7_label" aria-controls="__nav_7_nav" aria-expanded="true">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Developers
+
+    
+  </span>
+  
+  
+
+            
+              <span class="md-nav__icon md-icon" aria-hidden="true"></span>
+            
+          </a>
+        
+        
+          <nav class="md-nav" id="__nav_7_nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_7">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Developers
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Quickstart
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SqueekCore
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./mining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SqueekMining
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./token/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SqueekToken
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./nft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SqueekNFT
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./dotgrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  DotGrid renderer
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  API
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./owner-actions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Build owner actions
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./index-events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Index events
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./build-with-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Build with AI
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <a href="../security/" class="md-nav__link docs-section-link " id="__nav_8_label" aria-controls="__nav_8_nav" aria-expanded="false">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Security and trust
+
+    
+  </span>
+  
+  
+
+            
+              <span class="md-nav__icon md-icon" aria-hidden="true"></span>
+            
+          </a>
+        
+        
+          <nav class="md-nav" id="__nav_8_nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_8">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Security and trust
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security/proof-limits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  What the system proves
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security/roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Roles and permissions
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security/governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Governance and upgrades
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security/availability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Pauses and unavailable services
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security/privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Privacy
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        TL;DR
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Overview
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Deployments
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operational-addresses" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Operational addresses
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launch-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Launch configuration
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Environment file
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-invariants" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Integration invariants
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#in-this-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        In this section
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Related pages
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="./.." class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="././" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Developers
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+  
+  
+  
+  
+  
+    <div class="docs-page-context">
+      
+        
+        <span class="docs-page-label" aria-label="Page type">Reading path</span>
+      
+      
+        <span class="docs-page-actions">
+          <button type="button" class="docs-page-action" data-docs-copy-page="../developers.md">Copy page</button>
+          <a class="docs-page-action" href="../developers.md" type="text/markdown">View as Markdown</a>
+        </span>
+      
+    </div>
+  
+  
+                  
+
+
+<h1 id="developers">Developers<a class="headerlink" href="#developers" title="Link to this section">Link to this section</a></h1>
+<div class="docs-tldr">
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Link to this section">Link to this section</a></h2>
+<ul>
+<li>SqueekCore V3, SqueekMining version 6, SqueekToken and SqueekNFT form one contract graph, deployed on the Sepolia testnet.</li>
+<li>Every contract has a function-by-function page and a published ABI; addresses and identities are in one deployment record.</li>
+<li>Verify the graph before trusting any read, and follow the integration invariants below.</li>
+</ul>
+</div>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Link to this section">Link to this section</a></h2>
+<p>Squeekchain's contracts record the hamster's settled work, issue SQK for completed Squeek blocks, and track the Squeeks that share it. Everything an integration needs is onchain: there is no SDK, and the public API reference is coming soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Where to start</p>
+<ul>
+<li><strong>First read:</strong> <a href="quickstart/">Quickstart</a> verifies the deployment and reads SqueekCore in three files.</li>
+<li><strong>Working with a coding agent:</strong> <a href="build-with-ai/">Build with AI</a> installs the <code>squeekchain</code> agent skill with <code>npx skills add https://docs.squeekchain.com</code>.</li>
+<li><strong>Wallets, marketplaces and agents acting for owners:</strong> <a href="owner-actions/">Build owner actions</a> prepares claims and merges for the owner's wallet to sign.</li>
+<li><strong>Indexers and analytics:</strong> <a href="index-events/">Index events</a> builds a projection that survives reorgs.</li>
+<li><strong>Exact ABI-level detail:</strong> the contract pages for <a href="core/">SqueekCore</a>, <a href="mining/">SqueekMining</a>, <a href="token/">SqueekToken</a>, <a href="nft/">SqueekNFT</a> and the <a href="dotgrid/">DotGrid renderer</a>.</li>
+</ul>
+</div>
+<h2 id="deployments">Deployments<a class="headerlink" href="#deployments" title="Link to this section">Link to this section</a></h2>
+<p>The graph is deployed on <strong>Sepolia</strong> (chain ID <code>11155111</code>). It has passed a Sepolia smoke qualification only; there is no mainnet deployment, and public minting is paused. Contract source is not verified on block explorers, so decode with the published ABIs.</p>
+<table>
+<thead>
+<tr>
+<th>Contract</th>
+<th>Address</th>
+<th>Kind</th>
+<th>ABI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SqueekCore</td>
+<td><a href="https://eth-sepolia.blockscout.com/address/0x74665dAecA35A2303e767E76a2FF1FB6F93e119f"><code>0x74665dAecA35A2303e767E76a2FF1FB6F93e119f</code></a></td>
+<td>Transparent proxy</td>
+<td><a href="../assets/abi/SqueekCore.json">JSON</a></td>
+</tr>
+<tr>
+<td>SqueekMining</td>
+<td><a href="https://eth-sepolia.blockscout.com/address/0x3beE588fC20dE788Bac17d33b41Da7346cb27EC4"><code>0x3beE588fC20dE788Bac17d33b41Da7346cb27EC4</code></a></td>
+<td>Transparent proxy</td>
+<td><a href="../assets/abi/SqueekMining.json">JSON</a></td>
+</tr>
+<tr>
+<td>SqueekToken (SQK)</td>
+<td><a href="https://eth-sepolia.blockscout.com/address/0x6872bfa5ccc3e9e440c6c16e5ffdabb8dba4cc76"><code>0x6872bfa5ccc3e9e440c6c16e5ffdabb8dba4cc76</code></a></td>
+<td>Immutable</td>
+<td><a href="../assets/abi/SqueekToken.json">JSON</a></td>
+</tr>
+<tr>
+<td>SqueekNFT (Squeeks)</td>
+<td><a href="https://eth-sepolia.blockscout.com/address/0x0eAF3E0d40A0a8E5a6Ac030b2459E9FB0B7905c6"><code>0x0eAF3E0d40A0a8E5a6Ac030b2459E9FB0B7905c6</code></a></td>
+<td>Immutable</td>
+<td><a href="../assets/abi/SqueekNFT.json">JSON</a></td>
+</tr>
+<tr>
+<td>DotGrid renderer</td>
+<td><a href="https://eth-sepolia.blockscout.com/address/0x2dC7661D172fEf0FC900E0aD0f4ffCE68E8bfD75"><code>0x2dC7661D172fEf0FC900E0aD0f4ffCE68E8bfD75</code></a></td>
+<td>Immutable</td>
+<td><a href="../assets/abi/DotGridRenderer.json">JSON</a></td>
+</tr>
+<tr>
+<td>DotGrid page validator</td>
+<td><a href="https://eth-sepolia.blockscout.com/address/0xA674943387967cEBEf3C2110026A56F0A78d7F24"><code>0xA674943387967cEBEf3C2110026A56F0A78d7F24</code></a></td>
+<td>Immutable</td>
+<td><a href="../assets/abi/DotGridPageValidator.json">JSON</a></td>
+</tr>
+</tbody>
+</table>
+<p>Call SqueekCore and SqueekMining through their proxy addresses. Index from Ethereum block <code>11902282</code>, where SqueekCore launched; SqueekMining launched at block <code>11902290</code>. The full record, including implementations and launch configuration, is published as <a href="../assets/deployments/sepolia.json"><code>sepolia.json</code></a>.</p>
+<h3 id="operational-addresses">Operational addresses<a class="headerlink" href="#operational-addresses" title="Link to this section">Link to this section</a></h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Address</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Governance timelock</td>
+<td><code>0x6B35AB6E96EF292E4fdD3f15a4E812f3CA291844</code></td>
+<td>Owns both ProxyAdmins and is SqueekNFT governance. Minimum delay 60 seconds; anyone may execute a ready operation</td>
+</tr>
+<tr>
+<td>Governance Safe</td>
+<td><code>0x83a8d3e5ed02e5201a996c3f03e017b6a6c19d31</code></td>
+<td>Sole timelock proposer and controller of the Guardian; a Safe with one owner and threshold 1</td>
+</tr>
+<tr>
+<td>Guardian</td>
+<td><code>0x0E1B21ED2fc5fc48E221D3E863f09589Cb490e73</code></td>
+<td>Pauses SqueekCore and SqueekNFT minting; rotates the Reporter while SqueekCore is paused</td>
+</tr>
+<tr>
+<td>Reporter signer</td>
+<td><code>0xA663b5C05eAFa3e90bFbD3F7DEcdaaa3d41F5A75</code></td>
+<td>Signs each settlement; sends no transactions</td>
+</tr>
+<tr>
+<td>Settlement relayer</td>
+<td><code>0x75fee5a3ed7af9f2e553423a8a2c78b0395bb2f7</code></td>
+<td>Submits Reporter-signed settlements and pays gas</td>
+</tr>
+<tr>
+<td>Keeper</td>
+<td><code>0x98bbecb236cfd154b7ad4a1ea1434f4b5e761f06</code></td>
+<td>Submits SqueekMining checkpoints; any account can</td>
+</tr>
+<tr>
+<td>Hamster-Owned Liquidity</td>
+<td><code>0x828cb04dbf0bdd8eb35d19045638a1af6e3d17e8</code></td>
+<td>SqueekNFT <code>economicRecipient()</code>: reserve, sale closeout and royalties; a Safe with threshold 1</td>
+</tr>
+<tr>
+<td>DotGrid page root</td>
+<td><code>0x8dd828dab7471589b0123a99747408bc04f81567</code></td>
+<td>Stores the Squeeks image data returned by SqueekNFT <code>art()</code></td>
+</tr>
+<tr>
+<td>SqueekCore ProxyAdmin</td>
+<td><code>0x05a9af6c3f6780dd58168f2e145cdd0d64564a5e</code></td>
+<td>Upgrades SqueekCore; owned by the timelock</td>
+</tr>
+<tr>
+<td>SqueekMining ProxyAdmin</td>
+<td><code>0x7369d930f8dfb7a6657578eda5906d3472e4ac9a</code></td>
+<td>Upgrades SqueekMining; owned by the timelock</td>
+</tr>
+</tbody>
+</table>
+<p>On this testnet one owner controls governance, the Guardian and the Hamster-Owned Liquidity, and the timelock gives 60 seconds of notice. <a href="../security/governance/">Governance and upgrades</a> explains what each power can change.</p>
+<h3 id="launch-configuration">Launch configuration<a class="headerlink" href="#launch-configuration" title="Link to this section">Link to this section</a></h3>
+<p>SqueekCore <code>configuration()</code> on Sepolia, which <a href="quickstart/#verify-the-deployment">Verify the deployment</a> compares:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>streamId</code></td>
+<td><code>0xa0186b1a24b217f12f56c8574b492e286d00cd94bb5546cba45b048b19c60e44</code></td>
+</tr>
+<tr>
+<td><code>genesisTimestamp</code></td>
+<td><code>1791847800</code> (2026-10-12 23:30:00 UTC)</td>
+</tr>
+<tr>
+<td><code>roundDuration</code></td>
+<td><code>600</code> seconds</td>
+</tr>
+<tr>
+<td><code>maxWorkPerRound</code></td>
+<td><code>10000</code> work units</td>
+</tr>
+<tr>
+<td><code>maxRoundsPerBatch</code></td>
+<td><code>16</code></td>
+</tr>
+<tr>
+<td><code>guardian</code></td>
+<td><code>0x0E1B21ED2fc5fc48E221D3E863f09589Cb490e73</code></td>
+</tr>
+<tr>
+<td><code>reporter</code></td>
+<td><code>0xA663b5C05eAFa3e90bFbD3F7DEcdaaa3d41F5A75</code></td>
+</tr>
+<tr>
+<td><code>initialWorkPerThousandBlocks</code></td>
+<td><code>10875</code></td>
+</tr>
+<tr>
+<td><code>targetBlocksPerActiveRound</code>, <code>difficultySmoothingRounds</code></td>
+<td><code>40</code>, <code>30</code></td>
+</tr>
+<tr>
+<td><code>blockUnitsPerBlock</code></td>
+<td><code>1000000000</code></td>
+</tr>
+</tbody>
+</table>
+<p>SqueekMining <code>collectionPolicy(0)</code> for Squeeks on Sepolia. These are testnet values, not final policy.</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Power</th>
+<th>Merge cooldown (completed Squeek blocks)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1,000</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3,000</td>
+<td>4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>7,000</td>
+<td>6</td>
+</tr>
+<tr>
+<td>4</td>
+<td>15,000</td>
+<td>8</td>
+</tr>
+<tr>
+<td>5</td>
+<td>31,000</td>
+<td>10</td>
+</tr>
+<tr>
+<td>6</td>
+<td>63,000</td>
+<td>12</td>
+</tr>
+<tr>
+<td>7</td>
+<td>127,000</td>
+<td>14</td>
+</tr>
+<tr>
+<td>8</td>
+<td>255,000</td>
+<td>16</td>
+</tr>
+<tr>
+<td>9</td>
+<td>511,000</td>
+<td>18</td>
+</tr>
+<tr>
+<td>10</td>
+<td>1,023,000</td>
+<td>Cannot merge</td>
+</tr>
+</tbody>
+</table>
+<h3 id="environment-file">Environment file<a class="headerlink" href="#environment-file" title="Link to this section">Link to this section</a></h3>
+<p>The examples read these values from the environment:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># sepolia-env.sh</span>
+<span class="nv">EXPECTED_CHAIN_ID</span><span class="o">=</span><span class="m">11155111</span>
+<span class="nv">CORE_ADDRESS</span><span class="o">=</span>0x74665dAecA35A2303e767E76a2FF1FB6F93e119f
+<span class="nv">EXPECTED_CORE_IMPLEMENTATION</span><span class="o">=</span>0x0a71c86ab63a77675002a389fdf4d096a07b11e2
+<span class="nv">EXPECTED_CORE_RUNTIME_HASH</span><span class="o">=</span>0xe8a5a5aa913141ddd8951cf9fcc1375044b541773e5b0bf8ee04a5c7ac2d194d
+<span class="nv">EXPECTED_CORE_LAYOUT_DIGEST</span><span class="o">=</span>0x9a9c008e029460808209571703fbf2679785874e0e6d3232f16a864d12abcb20
+<span class="nv">EXPECTED_CORE_PROXY_ADMIN</span><span class="o">=</span>0x05a9af6c3f6780dd58168f2e145cdd0d64564a5e
+<span class="nv">MINING_ADDRESS</span><span class="o">=</span>0x3beE588fC20dE788Bac17d33b41Da7346cb27EC4
+<span class="nv">EXPECTED_MINING_IMPLEMENTATION</span><span class="o">=</span>0x08890b360c65fd878344bf6e23d1c36358433b4e
+<span class="nv">EXPECTED_MINING_RUNTIME_HASH</span><span class="o">=</span>0x6097cf8e8f96ea654878ab0a35410240ab1b05668c08ce1b3f99e04116e88bc1
+<span class="nv">EXPECTED_MINING_LAYOUT_DIGEST</span><span class="o">=</span>0xace564e9c052f30122779a32fdf3333ebce7cc708eae9c01cb7875b4f6ad37a6
+<span class="nv">EXPECTED_MINING_PROXY_ADMIN</span><span class="o">=</span>0x7369d930f8dfb7a6657578eda5906d3472e4ac9a
+<span class="nv">SQK_ADDRESS</span><span class="o">=</span>0x6872bfa5ccc3e9e440c6c16e5ffdabb8dba4cc76
+<span class="nv">NFT_ADDRESS</span><span class="o">=</span>0x0eAF3E0d40A0a8E5a6Ac030b2459E9FB0B7905c6
+<span class="nv">INDEX_FROM_BLOCK</span><span class="o">=</span><span class="m">11902282</span>
+<span class="nv">EXPECTED_TIMELOCK</span><span class="o">=</span>0x6B35AB6E96EF292E4fdD3f15a4E812f3CA291844
+<span class="nv">EXPECTED_STREAM_ID</span><span class="o">=</span>0xa0186b1a24b217f12f56c8574b492e286d00cd94bb5546cba45b048b19c60e44
+<span class="nv">EXPECTED_GENESIS_TIMESTAMP</span><span class="o">=</span><span class="m">1791847800</span>
+<span class="nv">EXPECTED_GUARDIAN</span><span class="o">=</span>0x0E1B21ED2fc5fc48E221D3E863f09589Cb490e73
+<span class="nv">EXPECTED_REPORTER</span><span class="o">=</span>0xA663b5C05eAFa3e90bFbD3F7DEcdaaa3d41F5A75
+<span class="nv">EXPECTED_MAX_WORK_PER_ROUND</span><span class="o">=</span><span class="m">10000</span>
+</code></pre></div>
+<h2 id="integration-invariants">Integration invariants<a class="headerlink" href="#integration-invariants" title="Link to this section">Link to this section</a></h2>
+<ol>
+<li><strong>Verify before reading.</strong> Check chain ID, proxy implementation, runtime hash, layout digest, implementation version, governance owner, launch configuration and the links between the four contracts. See <a href="quickstart/#verify-the-deployment">Verify the deployment</a>.</li>
+<li><strong>One block per snapshot.</strong> Read everything at one Ethereum block and keep its hash.</li>
+<li><strong>Use bigint.</strong> viem returns <code>bigint</code> for <code>uint64</code> and wider; never convert cumulative totals to <code>number</code>.</li>
+<li><strong>Count blocks from block units.</strong> Height is <code>cumulativeBlockUnits / 1_000_000_000</code>. Never divide physical work by difficulty.</li>
+<li><strong>Price with the previous difficulty.</strong> An event's difficulty prices the next active round, not its own.</li>
+<li><strong>Respect the certified frontier.</strong> Rounds after <code>settledThroughRound</code> are unknown, not zero. Every <code>BatchSettled</code> advances the frontier, including zero-work batches.</li>
+<li><strong>Read ownership live.</strong> Read <code>ownerOf</code> immediately before an owner action. Approved operators cannot claim or merge.</li>
+<li><strong>Prepare, don't sign.</strong> Claims and merges are signed by the NFT owner's wallet. Simulate every call and hand over unsigned calls; never hold or request a private key.</li>
+<li><strong>Count supply once.</strong> <code>CheckpointMinted</code> and the mint <code>Transfer</code> describe the same SQK.</li>
+<li><strong>Roll back on reorgs.</strong> Key events by <code>(chainId, blockHash, transactionHash, logIndex)</code> and replay derived state from the common ancestor.</li>
+<li><strong>Treat metadata as untrusted.</strong> Never inject a <code>tokenURI</code> SVG into application markup.</li>
+</ol>
+<h2 id="in-this-section">In this section<a class="headerlink" href="#in-this-section" title="Link to this section">Link to this section</a></h2>
+<div class="docs-paths">
+<ul>
+<li><a href="quickstart/">Quickstart</a> Verify the deployment and read SqueekCore in three files.</li>
+<li><a href="core/">SqueekCore</a> Settled work, block progress and difficulty.</li>
+<li><a href="mining/">SqueekMining</a> Positions, checkpoints, rewards, claims and merges.</li>
+<li><a href="token/">SqueekToken</a> The SQK token and its lifetime cap.</li>
+<li><a href="nft/">SqueekNFT</a> The Squeek NFT contract: ownership, minting and metadata.</li>
+<li><a href="dotgrid/">DotGrid renderer</a> Onchain images, traits and the identities that prove them.</li>
+<li><a href="owner-actions/">Build owner actions</a> Prepare claims and merges for the owner's wallet to sign.</li>
+<li><a href="index-events/">Index events</a> Replay settlements and rewards and survive reorgs.</li>
+<li><a href="build-with-ai/">Build with AI</a> Install the squeekchain agent skill and connect your coding agent.</li>
+<li><a href="api/">API</a> Read status, statistics, settlements, events and Squeek data over HTTP.</li>
+</ul>
+</div>
+<h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Link to this section">Link to this section</a></h2>
+<ul>
+<li><a href="build-with-ai/">Build with AI</a></li>
+<li><a href="../security/proof-limits/">What the system proves</a></li>
+<li><a href="../start/glossary/">Glossary</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  <div hidden data-docs-definitions>
+    
+      <span id="docs-definition-contract-ProxyAdmin" data-docs-term="contract-ProxyAdmin" data-contract="ProxyAdmin" data-label="ProxyAdmin contract" data-reference="../security/governance/#actors">Applies SqueekCore or SqueekMining upgrades authorized by its governing Timelock.</span>
+    
+      <span id="docs-definition-contract-Renderer" data-docs-term="contract-Renderer" data-contract="Renderer" data-label="Renderer contract" data-reference="./dotgrid/#overview">Generates Squeek images and metadata from fixed onchain visual data.</span>
+    
+      <span id="docs-definition-contract-SqueekCore" data-docs-term="contract-SqueekCore" data-contract="SqueekCore" data-label="SqueekCore contract" data-reference="./core/">Records physical work and earned block units on Ethereum, with difficulty adapting after active rounds.</span>
+    
+      <span id="docs-definition-contract-SqueekMining" data-docs-term="contract-SqueekMining" data-contract="SqueekMining" data-label="SqueekMining contract" data-reference="./mining/">Calculates rewards from settled work, holds funded SQK, and pays eligible NFT owners.</span>
+    
+      <span id="docs-definition-contract-SqueekNFT" data-docs-term="contract-SqueekNFT" data-contract="SqueekNFT" data-label="SqueekNFT contract" data-reference="./nft/">The Squeeks ERC-721 contract. Tracks NFT ownership and coordinates minting and merges with SqueekMining.</span>
+    
+      <span id="docs-definition-contract-SqueekToken" data-docs-term="contract-SqueekToken" data-contract="SqueekToken" data-label="SqueekToken contract" data-reference="./token/">The SQK ERC-20 contract. Enforces the lifetime supply cap; only SqueekMining can mint SQK.</span>
+    
+      <span id="docs-definition-contract-Timelock" data-docs-term="contract-Timelock" data-contract="Timelock" data-label="Timelock contract" data-reference="../security/governance/#actors">Queues governance operations and enforces a delay before they can be executed.</span>
+    
+      <span id="docs-definition-contract-Validator" data-docs-term="contract-Validator" data-contract="Validator" data-label="Validator contract" data-reference="./dotgrid/#validate">Checks that visual data conforms to the required DotGrid format.</span>
+    
+    
+      <span id="docs-definition-activation" data-docs-term="activation" data-label="Activation" data-aliases="activation|activations" data-reference="../squeeks/power/#when-does-new-power-start-earning">When new power starts earning. Minting and merging schedule it for the next round, and a checkpoint applies it.</span>
+    
+      <span id="docs-definition-checkpoint" data-docs-term="checkpoint" data-label="Checkpoint" data-aliases="checkpoint|checkpoints" data-reference="../rewards/checkpoints/">A reward update that processes settled Squeek blocks, issues their SQK, and applies scheduled power changes.</span>
+    
+      <span id="docs-definition-donor" data-docs-term="donor" data-label="Donor" data-aliases="donor|donors" data-reference="../squeeks/merge/#what-do-you-keep-and-what-do-you-lose">The Squeek permanently burned in a merge. Its unclaimed rewards move to the survivor, but its image is not combined or kept.</span>
+    
+      <span id="docs-definition-emissions" data-docs-term="emissions" data-label="Emissions" data-aliases="emissions|emission" data-reference="../rewards/creation/">SQK issued as settled Squeek blocks are processed: 6,900 SQK for each completed block, up to the lifetime cap.</span>
+    
+      <span id="docs-definition-hamster-proof-of-work" data-docs-term="hamster-proof-of-work" data-label="Hamster proof of work" data-aliases="hamster proof of work|hamster proof-of-work" data-reference="../security/proof-limits/#what-does-a-work-record-prove">Squeekchain&#x27;s record of accepted wheel-magnet passages.</span>
+    
+      <span id="docs-definition-merge" data-docs-term="merge" data-label="Merge" data-aliases="merge|merges|merging|merged" data-reference="../squeeks/merge/">Combining two eligible same-level Squeeks you own into one higher-level Squeek. One NFT is burned; the survivor keeps both Squeeks&#x27; unclaimed rewards.</span>
+    
+      <span id="docs-definition-merge-cooldown" data-docs-term="merge-cooldown" data-label="Merge cooldown" data-aliases="merge cooldown|merge cooldowns" data-reference="../squeeks/power/#when-can-you-merge-again">The completed Squeek blocks a Squeek waits through before it can merge again. It follows the Squeek through transfers.</span>
+    
+      <span id="docs-definition-power" data-docs-term="power" data-label="Power &#x2f; weight" data-aliases="active power|maximum power|weight|weights" data-reference="../squeeks/power/">What a Squeek earns with. Its level sets its maximum power; each Squeek block&#x27;s SQK is divided across all active power in proportion.</span>
+    
+      <span id="docs-definition-round" data-docs-term="round" data-label="Round" data-aliases="round|rounds" data-reference="../system/rounds-and-blocks/#round-boundaries" data-exclude-following="down|up|off">A ten-minute period used to group measured work. The device saves a completed round&#x27;s work total when measurement remained uninterrupted.</span>
+    
+      <span id="docs-definition-sqk" data-docs-term="sqk" data-label="SQK" data-aliases="SQK" data-reference="../rewards/token/">The token each completed Squeek block issues, shared by active power. It has a lifetime supply cap.</span>
+    
+      <span id="docs-definition-squeek" data-docs-term="squeek" data-label="Squeek" data-aliases="Squeek NFT|Squeek NFTs" data-reference="../squeeks/#whats-a-squeek">An NFT that owns a share of the Squeekchain network. It receives SQK from the hamster&#x27;s work according to its active power, set by its level and the SQK staked to it.</span>
+    
+      <span id="docs-definition-squeek-block" data-docs-term="squeek-block" data-label="Squeek block" data-aliases="Squeek block|Squeek blocks|Squeek-block|Squeek-blocks" data-reference="../system/rounds-and-blocks/#how-work-becomes-blocks">One billion block units earned from settled work at each round&#x27;s difficulty. Completed blocks supply SQK under the mining reward rules.</span>
+    
+      <span id="docs-definition-squeekfi" data-docs-term="squeekfi" data-label="SqueekFi" data-aliases="SqueekFi" data-reference="../rewards/squeekfi/">Squeekchain&#x27;s ecosystem for hamster-powered onchain finance, built on the public work record.</span>
+    
+      <span id="docs-definition-survivor" data-docs-term="survivor" data-label="Survivor" data-aliases="survivor|survivors" data-reference="../squeeks/merge/#what-do-you-keep-and-what-do-you-lose">The Squeek you keep in a merge. It gains a level, keeps its ID and image, and receives both Squeeks&#x27; unclaimed rewards.</span>
+    
+      <span id="docs-definition-unclaimed-rewards" data-docs-term="unclaimed-rewards" data-label="Unclaimed rewards" data-aliases="unclaimed rewards|unclaimed reward" data-reference="../squeeks/ownership/#what-goes-to-the-new-owner">A Squeek&#x27;s recorded reward balance that hasn&#x27;t been paid to a wallet. It stays with the Squeek when ownership changes.</span>
+    
+      <span id="docs-definition-wheely9000" data-docs-term="wheely9000" data-label="WHEELY9000" data-aliases="WHEELY9000" data-reference="../system/installation/">The hamster mining device. It records accepted wheel-magnet passages as work.</span>
+    
+      <span id="docs-definition-work-unit" data-docs-term="work-unit" data-label="Work unit &#x2f; accepted passage" data-aliases="work unit|work units|accepted passage|accepted passages|accepted magnet passage|accepted magnet passages|accepted wheel-magnet passage|accepted wheel-magnet passages" data-reference="../system/measurement/#what-it-is">One wheel-magnet passage that met the device&#x27;s counting rules.</span>
+    
+  </div>
+  <div id="docs-tooltip" class="docs-tooltip" role="tooltip" popover="manual"></div>
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../rewards/squeekfi/" class="md-footer__link md-footer__link--prev" aria-label="Previous: SqueekFi">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                SqueekFi
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="./quickstart/" class="md-footer__link md-footer__link--next" aria-label="Next: Quickstart">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Quickstart
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog" role="status" aria-atomic="true">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":["navigation.instant","navigation.instant.progress","navigation.indexes","navigation.path","navigation.footer","navigation.top","content.code.copy","search.highlight","search.suggest"],"redirect":null,"search":"../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","clipboard.error":"Could not copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.67a597eb.min.js"></script>
+      
+        <script src="../assets/javascripts/navigation.js"></script>
+      
+        <script src="../assets/javascripts/tooltips.js"></script>
+      
+        <script src="../assets/javascripts/tables.js"></script>
+      
+        <script src="../assets/javascripts/page-actions.js"></script>
+      
+        <script src="../assets/javascripts/whitepaper.js"></script>
+      
+    
+  <script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a51c203d4a3fb395',t:'MTc5MzIxMzQyNA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

@@ -1,0 +1,336 @@
+
+
+        Reading path
+
+          Copy page
+          View as Markdown
+
+DevelopersLink to this section
+
+TL;DRLink to this section
+
+SqueekCore V3, SqueekMining version 6, SqueekToken and SqueekNFT form one contract graph, deployed on the Sepolia testnet.
+
+Every contract has a function-by-function page and a published ABI; addresses and identities are in one deployment record.
+
+Verify the graph before trusting any read, and follow the integration invariants below.
+
+OverviewLink to this section
+
+Squeekchain's contracts record the hamster's settled work, issue SQK for completed Squeek blocks, and track the Squeeks that share it. Everything an integration needs is onchain: there is no SDK, and the public API reference is coming soon.
+
+Where to start
+
+First read: Quickstart verifies the deployment and reads SqueekCore in three files.
+
+Working with a coding agent: Build with AI installs the squeekchain agent skill with npx skills add https://docs.squeekchain.com.
+
+Wallets, marketplaces and agents acting for owners: Build owner actions prepares claims and merges for the owner's wallet to sign.
+
+Indexers and analytics: Index events builds a projection that survives reorgs.
+
+Exact ABI-level detail: the contract pages for SqueekCore, SqueekMining, SqueekToken, SqueekNFT and the DotGrid renderer.
+
+DeploymentsLink to this section
+
+The graph is deployed on Sepolia (chain ID 11155111). It has passed a Sepolia smoke qualification only; there is no mainnet deployment, and public minting is paused. Contract source is not verified on block explorers, so decode with the published ABIs.
+
+Contract
+Address
+Kind
+ABI
+
+SqueekCore
+0x74665dAecA35A2303e767E76a2FF1FB6F93e119f
+Transparent proxy
+JSON
+
+SqueekMining
+0x3beE588fC20dE788Bac17d33b41Da7346cb27EC4
+Transparent proxy
+JSON
+
+SqueekToken (SQK)
+0x6872bfa5ccc3e9e440c6c16e5ffdabb8dba4cc76
+Immutable
+JSON
+
+SqueekNFT (Squeeks)
+0x0eAF3E0d40A0a8E5a6Ac030b2459E9FB0B7905c6
+Immutable
+JSON
+
+DotGrid renderer
+0x2dC7661D172fEf0FC900E0aD0f4ffCE68E8bfD75
+Immutable
+JSON
+
+DotGrid page validator
+0xA674943387967cEBEf3C2110026A56F0A78d7F24
+Immutable
+JSON
+
+Call SqueekCore and SqueekMining through their proxy addresses. Index from Ethereum block 11902282, where SqueekCore launched; SqueekMining launched at block 11902290. The full record, including implementations and launch configuration, is published as sepolia.json.
+
+Operational addressesLink to this section
+
+Role
+Address
+What it does
+
+Governance timelock
+0x6B35AB6E96EF292E4fdD3f15a4E812f3CA291844
+Owns both ProxyAdmins and is SqueekNFT governance. Minimum delay 60 seconds; anyone may execute a ready operation
+
+Governance Safe
+0x83a8d3e5ed02e5201a996c3f03e017b6a6c19d31
+Sole timelock proposer and controller of the Guardian; a Safe with one owner and threshold 1
+
+Guardian
+0x0E1B21ED2fc5fc48E221D3E863f09589Cb490e73
+Pauses SqueekCore and SqueekNFT minting; rotates the Reporter while SqueekCore is paused
+
+Reporter signer
+0xA663b5C05eAFa3e90bFbD3F7DEcdaaa3d41F5A75
+Signs each settlement; sends no transactions
+
+Settlement relayer
+0x75fee5a3ed7af9f2e553423a8a2c78b0395bb2f7
+Submits Reporter-signed settlements and pays gas
+
+Keeper
+0x98bbecb236cfd154b7ad4a1ea1434f4b5e761f06
+Submits SqueekMining checkpoints; any account can
+
+Hamster-Owned Liquidity
+0x828cb04dbf0bdd8eb35d19045638a1af6e3d17e8
+SqueekNFT economicRecipient(): reserve, sale closeout and royalties; a Safe with threshold 1
+
+DotGrid page root
+0x8dd828dab7471589b0123a99747408bc04f81567
+Stores the Squeeks image data returned by SqueekNFT art()
+
+SqueekCore ProxyAdmin
+0x05a9af6c3f6780dd58168f2e145cdd0d64564a5e
+Upgrades SqueekCore; owned by the timelock
+
+SqueekMining ProxyAdmin
+0x7369d930f8dfb7a6657578eda5906d3472e4ac9a
+Upgrades SqueekMining; owned by the timelock
+
+On this testnet one owner controls governance, the Guardian and the Hamster-Owned Liquidity, and the timelock gives 60 seconds of notice. Governance and upgrades explains what each power can change.
+
+Launch configurationLink to this section
+
+SqueekCore configuration() on Sepolia, which Verify the deployment compares:
+
+Field
+Value
+
+streamId
+0xa0186b1a24b217f12f56c8574b492e286d00cd94bb5546cba45b048b19c60e44
+
+genesisTimestamp
+1791847800 (2026-10-12 23:30:00 UTC)
+
+roundDuration
+600 seconds
+
+maxWorkPerRound
+10000 work units
+
+maxRoundsPerBatch
+16
+
+guardian
+0x0E1B21ED2fc5fc48E221D3E863f09589Cb490e73
+
+reporter
+0xA663b5C05eAFa3e90bFbD3F7DEcdaaa3d41F5A75
+
+initialWorkPerThousandBlocks
+10875
+
+targetBlocksPerActiveRound, difficultySmoothingRounds
+40, 30
+
+blockUnitsPerBlock
+1000000000
+
+SqueekMining collectionPolicy(0) for Squeeks on Sepolia. These are testnet values, not final policy.
+
+Level
+Power
+Merge cooldown (completed Squeek blocks)
+
+1
+1,000
+2
+
+2
+3,000
+4
+
+3
+7,000
+6
+
+4
+15,000
+8
+
+5
+31,000
+10
+
+6
+63,000
+12
+
+7
+127,000
+14
+
+8
+255,000
+16
+
+9
+511,000
+18
+
+10
+1,023,000
+Cannot merge
+
+Environment fileLink to this section
+
+The examples read these values from the environment:
+
+# sepolia-env.sh
+EXPECTED_CHAIN_ID=11155111
+CORE_ADDRESS=0x74665dAecA35A2303e767E76a2FF1FB6F93e119f
+EXPECTED_CORE_IMPLEMENTATION=0x0a71c86ab63a77675002a389fdf4d096a07b11e2
+EXPECTED_CORE_RUNTIME_HASH=0xe8a5a5aa913141ddd8951cf9fcc1375044b541773e5b0bf8ee04a5c7ac2d194d
+EXPECTED_CORE_LAYOUT_DIGEST=0x9a9c008e029460808209571703fbf2679785874e0e6d3232f16a864d12abcb20
+EXPECTED_CORE_PROXY_ADMIN=0x05a9af6c3f6780dd58168f2e145cdd0d64564a5e
+MINING_ADDRESS=0x3beE588fC20dE788Bac17d33b41Da7346cb27EC4
+EXPECTED_MINING_IMPLEMENTATION=0x08890b360c65fd878344bf6e23d1c36358433b4e
+EXPECTED_MINING_RUNTIME_HASH=0x6097cf8e8f96ea654878ab0a35410240ab1b05668c08ce1b3f99e04116e88bc1
+EXPECTED_MINING_LAYOUT_DIGEST=0xace564e9c052f30122779a32fdf3333ebce7cc708eae9c01cb7875b4f6ad37a6
+EXPECTED_MINING_PROXY_ADMIN=0x7369d930f8dfb7a6657578eda5906d3472e4ac9a
+SQK_ADDRESS=0x6872bfa5ccc3e9e440c6c16e5ffdabb8dba4cc76
+NFT_ADDRESS=0x0eAF3E0d40A0a8E5a6Ac030b2459E9FB0B7905c6
+INDEX_FROM_BLOCK=11902282
+EXPECTED_TIMELOCK=0x6B35AB6E96EF292E4fdD3f15a4E812f3CA291844
+EXPECTED_STREAM_ID=0xa0186b1a24b217f12f56c8574b492e286d00cd94bb5546cba45b048b19c60e44
+EXPECTED_GENESIS_TIMESTAMP=1791847800
+EXPECTED_GUARDIAN=0x0E1B21ED2fc5fc48E221D3E863f09589Cb490e73
+EXPECTED_REPORTER=0xA663b5C05eAFa3e90bFbD3F7DEcdaaa3d41F5A75
+EXPECTED_MAX_WORK_PER_ROUND=10000
+
+Integration invariantsLink to this section
+
+Verify before reading. Check chain ID, proxy implementation, runtime hash, layout digest, implementation version, governance owner, launch configuration and the links between the four contracts. See Verify the deployment.
+
+One block per snapshot. Read everything at one Ethereum block and keep its hash.
+
+Use bigint. viem returns bigint for uint64 and wider; never convert cumulative totals to number.
+
+Count blocks from block units. Height is cumulativeBlockUnits / 1_000_000_000. Never divide physical work by difficulty.
+
+Price with the previous difficulty. An event's difficulty prices the next active round, not its own.
+
+Respect the certified frontier. Rounds after settledThroughRound are unknown, not zero. Every BatchSettled advances the frontier, including zero-work batches.
+
+Read ownership live. Read ownerOf immediately before an owner action. Approved operators cannot claim or merge.
+
+Prepare, don't sign. Claims and merges are signed by the NFT owner's wallet. Simulate every call and hand over unsigned calls; never hold or request a private key.
+
+Count supply once. CheckpointMinted and the mint Transfer describe the same SQK.
+
+Roll back on reorgs. Key events by (chainId, blockHash, transactionHash, logIndex) and replay derived state from the common ancestor.
+
+Treat metadata as untrusted. Never inject a tokenURI SVG into application markup.
+
+In this sectionLink to this section
+
+Quickstart Verify the deployment and read SqueekCore in three files.
+
+SqueekCore Settled work, block progress and difficulty.
+
+SqueekMining Positions, checkpoints, rewards, claims and merges.
+
+SqueekToken The SQK token and its lifetime cap.
+
+SqueekNFT The Squeek NFT contract: ownership, minting and metadata.
+
+DotGrid renderer Onchain images, traits and the identities that prove them.
+
+Build owner actions Prepare claims and merges for the owner's wallet to sign.
+
+Index events Replay settlements and rewards and survive reorgs.
+
+Build with AI Install the squeekchain agent skill and connect your coding agent.
+
+API Read status, statistics, settlements, events and Squeek data over HTTP.
+
+Related pagesLink to this section
+
+Build with AI
+
+What the system proves
+
+Glossary
+
+      Applies SqueekCore or SqueekMining upgrades authorized by its governing Timelock.
+
+      Generates Squeek images and metadata from fixed onchain visual data.
+
+      Records physical work and earned block units on Ethereum, with difficulty adapting after active rounds.
+
+      Calculates rewards from settled work, holds funded SQK, and pays eligible NFT owners.
+
+      The Squeeks ERC-721 contract. Tracks NFT ownership and coordinates minting and merges with SqueekMining.
+
+      The SQK ERC-20 contract. Enforces the lifetime supply cap; only SqueekMining can mint SQK.
+
+      Queues governance operations and enforces a delay before they can be executed.
+
+      Checks that visual data conforms to the required DotGrid format.
+
+      When new power starts earning. Minting and merging schedule it for the next round, and a checkpoint applies it.
+
+      A reward update that processes settled Squeek blocks, issues their SQK, and applies scheduled power changes.
+
+      The Squeek permanently burned in a merge. Its unclaimed rewards move to the survivor, but its image is not combined or kept.
+
+      SQK issued as settled Squeek blocks are processed: 6,900 SQK for each completed block, up to the lifetime cap.
+
+      Squeekchain's record of accepted wheel-magnet passages.
+
+      Combining two eligible same-level Squeeks you own into one higher-level Squeek. One NFT is burned; the survivor keeps both Squeeks' unclaimed rewards.
+
+      The completed Squeek blocks a Squeek waits through before it can merge again. It follows the Squeek through transfers.
+
+      What a Squeek earns with. Its level sets its maximum power; each Squeek block's SQK is divided across all active power in proportion.
+
+      A ten-minute period used to group measured work. The device saves a completed round's work total when measurement remained uninterrupted.
+
+      The token each completed Squeek block issues, shared by active power. It has a lifetime supply cap.
+
+      An NFT that owns a share of the Squeekchain network. It receives SQK from the hamster's work according to its active power, set by its level and the SQK staked to it.
+
+      One billion block units earned from settled work at each round's difficulty. Completed blocks supply SQK under the mining reward rules.
+
+      Squeekchain's ecosystem for hamster-powered onchain finance, built on the public work record.
+
+      The Squeek you keep in a merge. It gains a level, keeps its ID and image, and receives both Squeeks' unclaimed rewards.
+
+      A Squeek's recorded reward balance that hasn't been paid to a wallet. It stays with the Squeek when ownership changes.
+
+      The hamster mining device. It records accepted wheel-magnet passages as work.
+
+      One wheel-magnet passage that met the device's counting rules.
+
+              

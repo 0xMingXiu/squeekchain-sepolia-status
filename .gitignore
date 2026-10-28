@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+.env.*
+sepolia-env.local.sh
+*.log
+.DS_Store

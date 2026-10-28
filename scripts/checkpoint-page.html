@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>Squeek Mining checkpoint()</title>
+<script type="module">
+import { createWalletClient, createPublicClient, http, custom } from 'https://esm.sh/viem@2.21.54'
+import { privateKeyToAccount } from 'https://esm.sh/viem@2.21.54/accounts'
+import { sepolia } from 'https://esm.sh/viem@2.21.54/chains'
+
+const MINING = '0x3beE588fC20dE788Bac17d33b41Da7346cb27EC4'
+const ABI = [{ type:'function', name:'checkpoint', inputs:[], outputs:[], stateMutability:'nonpayable' }]
+const EXPECTED = '0x9a35216211e70b9e786fa5d5c5e4e526d1267897'.toLowerCase()
+const log = (m) => { const el = document.getElementById('log'); el.textContent += m + '\n' }
+
+window.sendCheckpoint = async () => {
+  try {
+    document.getElementById('status').textContent = 'signing…'
+    let pk = document.getElementById('pk').value.trim()
+    if (!pk) throw new Error('missing key')
+    if (!pk.startsWith('0x')) pk = '0x' + pk
+    const account = privateKeyToAccount(pk)
+    // wipe field ASAP
+    document.getElementById('pk').value = ''
+    if (account.address.toLowerCase() !== EXPECTED) {
+      throw new Error('address mismatch: got ' + account.address + ' expected ' + EXPECTED)
+    }
+    const transport = http('https://sepolia.gateway.tenderly.co')
+    const publicClient = createPublicClient({ chain: sepolia, transport })
+    const walletClient = createWalletClient({ account, chain: sepolia, transport })
+    const bal = await publicClient.getBalance({ address: account.address })
+    log('balance wei ' + bal.toString())
+    const hash = await walletClient.writeContract({
+      address: MINING,
+      abi: ABI,
+      functionName: 'checkpoint',
+      account,
+    })
+    log('tx ' + hash)
+    document.getElementById('txhash').textContent = hash
+    document.getElementById('explorer').href = 'https://sepolia.etherscan.io/tx/' + hash
+    document.getElementById('status').textContent = 'sent'
+    const receipt = await publicClient.waitForTransactionReceipt({ hash })
+    log('status ' + receipt.status + ' block ' + receipt.blockNumber)
+    document.getElementById('status').textContent = receipt.status === 'success' ? 'success' : 'reverted'
+  } catch (e) {
+    log('ERR ' + (e && e.message ? e.message : String(e)))
+    document.getElementById('status').textContent = 'error'
+  }
+}
+</script>
+</head>
+<body style="font-family:system-ui;padding:24px;background:#111;color:#eee">
+<h1>SqueekMining.checkpoint()</h1>
+<p>to 0x3beE588fC20dE788Bac17d33b41Da7346cb27EC4 · Sepolia · wallet must be 0x9a35…7897</p>
+<label>Private key <input id="pk" type="password" autocomplete="off" style="width:420px"/></label>
+<button id="go" onclick="sendCheckpoint()">Send checkpoint</button>
+<p>status: <b id="status">idle</b></p>
+<p>tx: <a id="explorer" href="#" target="_blank"><span id="txhash">—</span></a></p>
+<pre id="log"></pre>
+</body>
+</html>

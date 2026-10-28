@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Squeekchain Sepolia · Status</title>
+<style>
+ body{font-family:system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC",sans-serif;background:#0f1115;color:#e6e6e6;margin:0;padding:24px}
+ h1{font-size:20px;margin:0 0 4px} .sub{color:#8a8f98;font-size:13px;margin-bottom:18px}
+ .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+ .card{background:#181b22;border:1px solid #262a33;border-radius:10px;padding:14px}
+ .k{color:#8a8f98;font-size:12px} .v{font-size:24px;font-weight:600;margin-top:6px;font-variant-numeric:tabular-nums;word-break:break-all}
+ .small{font-size:13px;font-weight:400} .ok{color:#3fb950} .bad{color:#f85149} .warn{color:#d29922}
+ .banner{padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px}
+ .banner.warn{background:#2d2410;border:1px solid #6b5313} .banner.bad{background:#2d1214;border:1px solid #6e2427}
+ .bar{height:8px;background:#262a33;border-radius:4px;margin-top:8px;overflow:hidden}.bar>i{display:block;height:100%;background:#58a6ff}
+ code{font-size:12px;color:#a5d6ff} footer{margin-top:18px;color:#6e7681;font-size:12px}
+</style></head><body>
+<h1>🐹 Squeekchain · Sepolia Status Board</h1>
+<div class="sub">只读 read-only · 每次刷新先校验部署再同块快照 / verify-first, single-block snapshot · <span id="upd">loading…</span></div>
+<div id="banners"></div>
+<div class="grid" id="grid"></div>
+<footer id="foot"></footer>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = (s) => { try { return BigInt(s).toLocaleString("en-US"); } catch { return esc(s); } };
+function card(k, v, extra = "") { return `<div class="card"><div class="k">${k}</div><div class="v">${v}</div>${extra}</div>`; }
+async function tick() {
+  try {
+    const r = await fetch("/api/status"); const d = await r.json();
+    let b = "";
+    if (d.reporterOverride) b += `<div class="banner warn">⚠️ Reporter 已在链上轮换，官方记录未更新 / Reporter rotated on-chain; docs record is stale. Using local override <code>${esc(d.reporterOverride.used)}</code> (docs: <code>${esc(d.reporterOverride.docs)}</code>).</div>`;
+    if (!d.ok) b += `<div class="banner bad">❌ 校验失败，不读取状态 / Verification failed — state not read: ${esc(d.error)}</div>`;
+    $("banners").innerHTML = b;
+    if (!d.ok) { $("grid").innerHTML = ""; }
+    else {
+      const s = d.state, c = d.configuration;
+      const prog = Number(BigInt(s.blockProgress) * 10000n / BigInt(c.blockUnitsPerBlock)) / 100; // safe: < 10000
+      const supply = BigInt(d.sqkTotalSupplyWei) / 10n ** 18n;
+      $("grid").innerHTML =
+        card("Deployment 部署校验", `<span class="ok">✔ verified</span>`, `<div class="k" style="margin-top:6px">Core v${esc(d.contracts.coreVersion)} · Mining v${esc(d.contracts.miningVersion)}</div>`) +
+        card("Paused 暂停", s.paused ? `<span class="bad">PAUSED</span>` : `<span class="ok">running</span>`) +
+        card("Current round 当前轮次 (wall clock)", fmt(d.currentRound)) +
+        card("Certified frontier 已结算轮次", fmt(d.frontier), `<div class="k" style="margin-top:6px">lag ${fmt(d.lagRounds)} rounds</div>`) +
+        card("Squeek block height 区块高度", fmt(s.blockHeight), `<div class="bar"><i style="width:${prog}%"></i></div><div class="k" style="margin-top:4px">next block ${prog.toFixed(2)}%</div>`) +
+        card("Difficulty 难度 (workPerThousandBlocks)", fmt(s.workPerThousandBlocks), `<div class="k" style="margin-top:6px">initial ${fmt(c.initialWorkPerThousandBlocks)}</div>`) +
+        card("Cumulative work 累计工作量", fmt(s.cumulativeWork)) +
+        card("Settlement nonce 结算次数", fmt(s.authorizationNonce)) +
+        card("SQK total supply", fmt(supply) + ` <span class="small">SQK</span>`);
+    }
+    $("foot").innerHTML = `chainId ${esc(d.chainId ?? "?")} · Ethereum block <code>${esc(d.blockNumber ?? "?")}</code> · hash <code>${esc(d.blockHash ?? "?")}</code> · RPC ${esc(d.rpc ?? "?")}`;
+    $("upd").textContent = "updated " + new Date().toLocaleTimeString();
+  } catch (e) { $("upd").textContent = "error: " + e.message; }
+}
+tick(); setInterval(tick, 15000);
+</script></body></html>

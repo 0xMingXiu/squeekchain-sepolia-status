@@ -1,0 +1,295 @@
+
+
+        Integration guide
+
+          Copy page
+          View as Markdown
+
+QuickstartLink to this section
+
+TL;DRLink to this section
+
+Three files: setup.ts connects at one Ethereum block, verify.ts checks the whole contract graph, read-core.ts reads SqueekCore.
+
+Every other example on this site imports the first two, so start here.
+
+Everything is read-only; nothing is signed or sent.
+
+Before you startLink to this section
+
+You need:
+
+Input
+Where it comes from
+
+RPC endpoint with historical state
+Your node or provider; it must serve reads at a past block
+
+Chain ID and Ethereum block
+Your confirmation policy; read everything at this one block
+
+Proxy addresses
+Deployments for SqueekCore, SqueekMining, SqueekToken and SqueekNFT
+
+Expected identities
+The sepolia-env.sh block on the same page: implementation address, runtime hash, layout digest and proxy admin for each proxy
+
+Use the ABI for the implementation version you verify. SqueekCore V3 and SqueekMining version 6 change tuples and events, so decoding them with an earlier ABI is unsafe even where selectors match.
+
+The examples use TypeScript with viem 2 as ES modules (for example bun or tsx). Each one imports this shared setup:
+
+// setup.ts
+import { createPublicClient, http } from "viem";
+
+export const required = (name: string): string => {
+  const value = process.env[name];
+  if (!value) throw new Error(`Supply ${name}`);
+  return value;
+};
+export const client = createPublicClient({ transport: http(required("RPC_URL")) });
+if (BigInt(await client.getChainId()) !== BigInt(required("EXPECTED_CHAIN_ID"))) {
+  throw new Error("Chain mismatch");
+}
+export const blockNumber = BigInt(required("ETHEREUM_BLOCK"));
+export const block = await client.getBlock({ blockNumber });
+
+Load the values with set -a; . ./sepolia-env.sh; set +a, then set RPC_URL to a Sepolia endpoint that serves historical state and ETHEREUM_BLOCK to a confirmed block. Run each file with bun <file> or npx tsx <file>.
+
+StepsLink to this section
+
+Verify the deploymentLink to this section
+
+Read each proxy's EIP-1967 implementation and admin slots at the selected block.
+
+Compare the implementation address, the keccak256 of its runtime code, the proxy admin and the storage-layout digest with the deployment record.
+
+Check the implementation version: 3 for SqueekCore and 6 for SqueekMining. The EIP-712 domain version of 1 is a different identity.
+
+Check the connections: SqueekMining's core() is the SqueekCore proxy, SqueekToken's mining() is the SqueekMining proxy, and SqueekMining's collectionPolicy(0) names the SqueekNFT address.
+
+Compare SqueekCore configuration() with the launch configuration: stream, genesis, Guardian, Reporter and work cap. Check that each proxy admin is owned by the governance timelock. Stop on any mismatch; never substitute a default.
+
+// verify.ts
+import { getAddress, keccak256, parseAbi, type Address, type Hex } from "viem";
+import { blockNumber, client, required } from "./setup";
+
+const IMPLEMENTATION_SLOT = "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc";
+const ADMIN_SLOT = "0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103";
+const identityAbi = parseAbi([
+  "function implementationCodeAddress() view returns (address)",
+  "function implementationCodeVersion() view returns (uint64)",
+  "function implementationStorageLayoutDigest() view returns (bytes32)",
+  "function owner() view returns (address)",
+]);
+const slotAddress = (word: Hex | undefined) => getAddress(`0x${(word ?? "0x").slice(-40)}`);
+const same = (a: string, b: string) => a.toLowerCase() === b.toLowerCase();
+
+export async function verifyProxy(name: "CORE" | "MINING", version: bigint): Promise<Address> {
+  const proxy = getAddress(required(`${name}_ADDRESS`));
+  const implementation = slotAddress(
+    await client.getStorageAt({ address: proxy, slot: IMPLEMENTATION_SLOT, blockNumber }),
+  );
+  const admin = slotAddress(await client.getStorageAt({ address: proxy, slot: ADMIN_SLOT, blockNumber }));
+  const adminOwner = await client.readContract({ address: admin, abi: identityAbi, functionName: "owner", blockNumber });
+  const code = await client.getCode({ address: implementation, blockNumber });
+  const read = { address: proxy, abi: identityAbi, blockNumber } as const;
+  const [reported, codeVersion, layout] = await Promise.all([
+    client.readContract({ ...read, functionName: "implementationCodeAddress" }),
+    client.readContract({ ...read, functionName: "implementationCodeVersion" }),
+    client.readContract({ ...read, functionName: "implementationStorageLayoutDigest" }),
+  ]);
+  if (
+    !same(implementation, required(`EXPECTED_${name}_IMPLEMENTATION`)) ||
+    !same(reported, implementation) ||
+    !code || !same(keccak256(code), required(`EXPECTED_${name}_RUNTIME_HASH`)) ||
+    !same(admin, required(`EXPECTED_${name}_PROXY_ADMIN`)) ||
+    !same(layout, required(`EXPECTED_${name}_LAYOUT_DIGEST`)) ||
+    !same(adminOwner, required("EXPECTED_TIMELOCK")) ||
+    codeVersion !== version
+  ) throw new Error(`${name}: deployment does not match the approved record`);
+  return proxy;
+}
+
+export async function verifyGraph() {
+  const core = await verifyProxy("CORE", 3n);
+  const mining = await verifyProxy("MINING", 6n);
+  const token = getAddress(required("SQK_ADDRESS"));
+  const nft = getAddress(required("NFT_ADDRESS"));
+  const links = parseAbi([
+    "function core() view returns (address)",
+    "function mining() view returns (address)",
+    "function collectionPolicy(uint8 collection) view returns ((address nft, uint16 maxSupply, uint8 maximumLevel, (uint64 weight, uint64 cooldownBlocks)[] levels))",
+    "function configuration() view returns ((bytes32 streamId, uint64 genesisTimestamp, uint64 roundDuration, uint64 maxWorkPerRound, uint16 maxRoundsPerBatch, address guardian, address reporter, uint32 initialWorkPerThousandBlocks, uint64 targetBlocksPerActiveRound, uint64 difficultySmoothingRounds, uint96 blockUnitsPerBlock))",
+  ]);
+  const [miningCore, tokenMining, policy, config] = await Promise.all([
+    client.readContract({ address: mining, abi: links, functionName: "core", blockNumber }),
+    client.readContract({ address: token, abi: links, functionName: "mining", blockNumber }),
+    client.readContract({ address: mining, abi: links, functionName: "collectionPolicy", args: [0], blockNumber }),
+    client.readContract({ address: core, abi: links, functionName: "configuration", blockNumber }),
+  ]);
+  if (!same(miningCore, core) || !same(tokenMining, mining) || !same(policy.nft, nft)) {
+    throw new Error("Contracts are not connected as one graph");
+  }
+  if (
+    !same(config.streamId, required("EXPECTED_STREAM_ID")) ||
+    config.genesisTimestamp !== BigInt(required("EXPECTED_GENESIS_TIMESTAMP")) ||
+    !same(config.guardian, required("EXPECTED_GUARDIAN")) ||
+    !same(config.reporter, required("EXPECTED_REPORTER")) ||
+    config.maxWorkPerRound !== BigInt(required("EXPECTED_MAX_WORK_PER_ROUND"))
+  ) throw new Error("SqueekCore configuration does not match the launch configuration");
+  return { core, mining, token, nft };
+}
+
+The snippet checks code identity, governance ownership and launch configuration, not intent: a matching value is only as trustworthy as the record that supplied it.
+
+Read SqueekCore stateLink to this section
+
+Read configuration() and state() at the selected block.
+
+Check that blockHeight and blockProgress equal cumulativeBlockUnits divided by and modulo blockUnitsPerBlock.
+
+For history, read roundPage and advance your cursor to the returned certifiedThroughRound, not the requested end.
+
+Use blockInfo(b) for the completion round and work threshold of completed block b.
+
+// read-core.ts
+import { parseAbi } from "viem";
+import { block, blockNumber, client } from "./setup";
+import { verifyGraph } from "./verify";
+
+const { core } = await verifyGraph();
+const abi = parseAbi([
+  "function configuration() view returns ((bytes32 streamId, uint64 genesisTimestamp, uint64 roundDuration, uint64 maxWorkPerRound, uint16 maxRoundsPerBatch, address guardian, address reporter, uint32 initialWorkPerThousandBlocks, uint64 targetBlocksPerActiveRound, uint64 difficultySmoothingRounds, uint96 blockUnitsPerBlock))",
+  "function state() view returns ((uint64 settledThroughRound, uint64 cumulativeWork, uint96 cumulativeBlockUnits, uint64 blockHeight, uint96 blockProgress, uint32 workPerThousandBlocks, uint256 authorizationNonce, bool paused))",
+  "function roundPage(uint64 afterRound, uint64 throughRound, uint256 maxRecords) view returns ((uint64 certifiedThroughRound, (uint64 cumulativeWork, uint96 cumulativeBlockUnits, uint32 workPerThousandBlocks) start, (uint64 cumulativeWork, uint96 cumulativeBlockUnits, uint32 workPerThousandBlocks) end, (uint64 roundId, uint64 cumulativeWork, uint96 cumulativeBlockUnits, uint32 workPerThousandBlocks, bytes32 dataHash)[] rounds))",
+]);
+const read = { address: core, abi, blockNumber } as const;
+const config = await client.readContract({ ...read, functionName: "configuration" });
+const state = await client.readContract({ ...read, functionName: "state" });
+const units = config.blockUnitsPerBlock;
+if (state.blockHeight !== state.cumulativeBlockUnits / units || state.blockProgress !== state.cumulativeBlockUnits % units) {
+  throw new Error("Inconsistent block units");
+}
+const frontier = state.settledThroughRound;
+const point = await client.readContract({ ...read, functionName: "roundPage", args: [frontier, frontier, 0n] });
+if (
+  point.certifiedThroughRound !== frontier ||
+  point.end.cumulativeBlockUnits !== state.cumulativeBlockUnits ||
+  point.end.workPerThousandBlocks !== state.workPerThousandBlocks
+) throw new Error("Inconsistent frontier endpoint");
+const currentRound = block.timestamp < config.genesisTimestamp
+  ? 0n
+  : (block.timestamp - config.genesisTimestamp) / config.roundDuration + 1n;
+console.log({ blockNumber, blockHash: block.hash, currentRound, frontier, height: state.blockHeight, state });
+
+Expected resultLink to this section
+
+read-core.ts prints the Ethereum block and hash, the current round by wall clock, the certified frontier (settledThroughRound), the completed Squeek block height, and the full state() tuple. Field meanings are in SqueekCore views.
+
+The frontier normally trails the current round: rounds are settled in batches after they close and are verified. A frontier far behind means settlement is delayed, not that work was lost.
+
+Common failuresLink to this section
+
+Failure
+Cause
+Fix
+
+Chain mismatch
+RPC_URL points at another network
+Use a Sepolia endpoint
+
+deployment does not match the approved record
+Wrong address, an upgrade since the record, or a stale sepolia-env.sh
+Compare with Deployments; stop if the record is current
+
+Contracts are not connected as one graph
+Addresses from different deployments
+Use one deployment's addresses
+
+Historical read fails
+The endpoint does not serve state at ETHEREUM_BLOCK
+Use an archive-capable endpoint or a recent block
+
+Wrong tuple fields or decode error
+An earlier ABI (V2 workPerBlock, currentWork, currentRound())
+Use the published SqueekCore ABI
+
+Block count is off
+Dividing physical work by difficulty
+Use cumulativeBlockUnits / blockUnitsPerBlock
+
+roundPage reverts
+Round is past the certified frontier
+Read at most settledThroughRound
+
+Precision loss
+Converting uint64 or wider values to number
+Keep bigint; viem returns number only for uint48 and narrower
+
+Verify the resultLink to this section
+
+Record the chain ID, the proxy and implementation identities, the Ethereum block number and hash, and the ABI version with every result. Read the block again after your reads and confirm its hash is unchanged; that detects a reorganization during the read.
+
+Next: read Squeek positions with the SqueekMining usage example, or prepare owner transactions in Build owner actions.
+
+Related pagesLink to this section
+
+Developers
+
+SqueekCore
+
+SqueekMining
+
+Build owner actions
+
+      Applies SqueekCore or SqueekMining upgrades authorized by its governing Timelock.
+
+      Generates Squeek images and metadata from fixed onchain visual data.
+
+      Records physical work and earned block units on Ethereum, with difficulty adapting after active rounds.
+
+      Calculates rewards from settled work, holds funded SQK, and pays eligible NFT owners.
+
+      The Squeeks ERC-721 contract. Tracks NFT ownership and coordinates minting and merges with SqueekMining.
+
+      The SQK ERC-20 contract. Enforces the lifetime supply cap; only SqueekMining can mint SQK.
+
+      Queues governance operations and enforces a delay before they can be executed.
+
+      Checks that visual data conforms to the required DotGrid format.
+
+      When new power starts earning. Minting and merging schedule it for the next round, and a checkpoint applies it.
+
+      A reward update that processes settled Squeek blocks, issues their SQK, and applies scheduled power changes.
+
+      The Squeek permanently burned in a merge. Its unclaimed rewards move to the survivor, but its image is not combined or kept.
+
+      SQK issued as settled Squeek blocks are processed: 6,900 SQK for each completed block, up to the lifetime cap.
+
+      Squeekchain's record of accepted wheel-magnet passages.
+
+      Combining two eligible same-level Squeeks you own into one higher-level Squeek. One NFT is burned; the survivor keeps both Squeeks' unclaimed rewards.
+
+      The completed Squeek blocks a Squeek waits through before it can merge again. It follows the Squeek through transfers.
+
+      What a Squeek earns with. Its level sets its maximum power; each Squeek block's SQK is divided across all active power in proportion.
+
+      A ten-minute period used to group measured work. The device saves a completed round's work total when measurement remained uninterrupted.
+
+      The token each completed Squeek block issues, shared by active power. It has a lifetime supply cap.
+
+      An NFT that owns a share of the Squeekchain network. It receives SQK from the hamster's work according to its active power, set by its level and the SQK staked to it.
+
+      One billion block units earned from settled work at each round's difficulty. Completed blocks supply SQK under the mining reward rules.
+
+      Squeekchain's ecosystem for hamster-powered onchain finance, built on the public work record.
+
+      The Squeek you keep in a merge. It gains a level, keeps its ID and image, and receives both Squeeks' unclaimed rewards.
+
+      A Squeek's recorded reward balance that hasn't been paid to a wallet. It stays with the Squeek when ownership changes.
+
+      The hamster mining device. It records accepted wheel-magnet passages as work.
+
+      One wheel-magnet passage that met the device's counting rules.
+
+              
